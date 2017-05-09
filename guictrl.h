@@ -27,6 +27,27 @@ private:
     vector<float> east = {-0.5, -0.5};
     vector<float> south = {0.5, -0.5};
     vector<float> west = {0.5, 0.5};
+
+    void initA();
+    void initB();
+    void initC();
+    void initD();
+
+    float ax;
+    float ay;
+    float az;
+
+    float bx;
+    float by;
+    float bz;
+
+    float cx;
+    float cy;
+    float cz;
+
+    float dx;
+    float dy;
+    float dz;
 };
 
 #endif // GUICTRL_H

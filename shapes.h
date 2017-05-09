@@ -8,7 +8,7 @@ class Shapes
 {
 public:
     Shapes();
-    void four(float a, float b, float c, float d, vector<float> rgb, float zoom);
+    void four(vector<vector<float> > things, vector<float> rgb, float zoom);
 };
 
 #endif // SHAPES_H

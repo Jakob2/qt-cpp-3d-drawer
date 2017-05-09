@@ -18,16 +18,22 @@ Db::Db(){
     this->connectSQL();
     //this->selectSQL();
     this->selectNames();
-    Db::things.resize(1);
+    /*Db::things.resize(1);
     Db::things[0].push_back(0);
     Db::things[0].push_back(0);
     Db::things[0].push_back(0);
-    Db::things[0].push_back(0);
+    Db::things[0].push_back(0);*/
+    Db::things.resize(4*3);
+    for(int i=0; i<4; i++){
+        for(int j=0; j<3; j++){
+            Db::things[i].push_back(0);
+        }
+    }
 }
 
 void Db::connectSQL(){
     QSqlDatabase m_db = QSqlDatabase::addDatabase("QSQLITE");
-    m_db.setDatabaseName("/home/ok/jakob/QT4/DATABASES/graphics");
+    m_db.setDatabaseName("/home/ok/jakob/QT4/DATABASES/3dg");
     if(!m_db.open()) cout<< "Error: connection with database fail"<<endl;
     else cout<< "Database: connection ok"<<endl;
 }
@@ -35,16 +41,38 @@ void Db::connectSQL(){
 void Db::selectThings(QString name, QString part){
     Db::things.clear();
     QSqlQuery query;
-    if(query.exec("SELECT a, b, c, d FROM poly WHERE name ='"+name+"' AND part ='"+part+"'")) cout<<"selected"<<endl;
+    if(query.exec("SELECT ax,ay,az, bx,by,bz, cx,cy,cz, dx,dy,dz FROM poly WHERE name ='"+name+"' AND part ='"+part+"'")) cout<<"selected"<<endl;
     else qDebug()<<"insert error: "<<query.lastError()<<" / "<<query.lastQuery();
-    int count = 0;
+    //int count = 0;
     while(query.next()){
-        count++;
-        Db::things.resize(count*4);
+        /*count++;
+        Db::things.resize(count*3);
         Db::things[count-1].push_back(query.value(0).toFloat());
         Db::things[count-1].push_back(query.value(1).toFloat());
         Db::things[count-1].push_back(query.value(2).toFloat());
-        Db::things[count-1].push_back(query.value(3).toFloat());
+        Db::things[count-1].push_back(query.value(3).toFloat());*/
+        Db::things.resize(4*3);
+
+        Db::things[0].push_back(query.value(0).toFloat());
+        Db::things[0].push_back(query.value(1).toFloat());
+        Db::things[0].push_back(query.value(2).toFloat());
+
+        Db::things[1].push_back(query.value(3).toFloat());
+        Db::things[1].push_back(query.value(4).toFloat());
+        Db::things[1].push_back(query.value(5).toFloat());
+
+        Db::things[2].push_back(query.value(6).toFloat());
+        Db::things[2].push_back(query.value(7).toFloat());
+        Db::things[2].push_back(query.value(8).toFloat());
+
+        Db::things[3].push_back(query.value(9).toFloat());
+        Db::things[3].push_back(query.value(10).toFloat());
+        Db::things[3].push_back(query.value(11).toFloat());
+    }
+    for(int i=0; i<(int)Db::things.size(); i++){
+        for(int j=0; j<(int)Db::things[i].size(); j++){
+            cout<<Db::things[i][j]<<endl;
+        }
     }
 }
 

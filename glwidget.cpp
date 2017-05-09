@@ -21,7 +21,7 @@ void GlWidget::paintGL(float zoom){
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
     vector<float> rgb;
     rgb = {1,0,0};
-    this->four(Db::things[0][0], Db::things[0][1], Db::things[0][2], Db::things[0][3], rgb, zoom);
+    this->four(Db::things, rgb, zoom);
 }
 
 void GlWidget::resizeGL(int w, int h, float centerX, float centerZ){

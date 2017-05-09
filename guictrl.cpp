@@ -70,3 +70,27 @@ void GuiCtrl::choosePart(){
     this->selectThings(comboBox_name->currentText(), comboBox_part->currentText());
     view.paintGL(1.0);
 }
+
+void GuiCtrl::initA(){
+    doubleSpinBox_ax->setValue(Db::things[0][1]);
+    doubleSpinBox_ay->setValue(Db::things[0][2]);
+    doubleSpinBox_az->setValue(Db::things[0][3]);
+}
+
+/*void GuiCtrl::initB(){
+    doubleSpinBox_bx = Db::things[0][1];
+    doubleSpinBox_by = Db::things[0][2];
+    doubleSpinBox_bz = Db::things[0][3];
+}
+
+void GuiCtrl::initC(){
+    doubleSpinBox_cx = Db::things[2][1];
+    doubleSpinBox_cy = Db::things[2][2];
+    doubleSpinBox_cz = Db::things[2][3];
+}
+
+void GuiCtrl::initD(){
+    doubleSpinBox_dx = Db::things[3][1];
+    doubleSpinBox_dy = Db::things[3][2];
+    doubleSpinBox_dz = Db::things[3][3];
+}*/

@@ -7,15 +7,15 @@ Shapes::Shapes(){
 
 }
 
-void Shapes::four(float a, float b, float c, float d, vector<float> rgb, float zoom){
+void Shapes::four(vector<vector<float> >things, vector<float> rgb, float zoom){
     glScalef(zoom, zoom, zoom);
     glPushMatrix();
     glBegin(GL_POLYGON);
         glColor3f(rgb[0], rgb[1], rgb[2]);
-        glVertex3f(0,0,a);
-        glVertex3f(0,0,b);
-        glVertex3f(1,0,c);
-        glVertex3f(1,0,d);
+        glVertex3f(things[0][0], things[0][1], things[0][2]);
+        glVertex3f(things[1][0], things[1][1], things[1][2]);
+        glVertex3f(things[2][0], things[2][1], things[2][2]);
+        glVertex3f(things[3][0], things[3][1], things[3][2]);
     glEnd();
     glPopMatrix();
 }
