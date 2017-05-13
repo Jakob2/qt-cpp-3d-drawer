@@ -73,12 +73,33 @@ void GuiCtrl::choosePart(){
     this->selectThings(comboBox_name->currentText(), comboBox_part->currentText());
     view.paintGL(1.0, rotation);
     initA();
+    initB();
+    initC();
+    initD();
 }
 
 void GuiCtrl::initA(){
-    doubleSpinBox_ax->setValue(Db::things[0][1]);
-    doubleSpinBox_ay->setValue(Db::things[0][2]);
-    doubleSpinBox_az->setValue(Db::things[0][3]);
+    doubleSpinBox_ax->setValue(Db::things[0][0]);
+    doubleSpinBox_ay->setValue(Db::things[0][1]);
+    doubleSpinBox_az->setValue(Db::things[0][2]);
+}
+
+void GuiCtrl::initB(){
+    doubleSpinBox_bx->setValue(Db::things[1][0]);
+    doubleSpinBox_by->setValue(Db::things[1][1]);
+    doubleSpinBox_bz->setValue(Db::things[1][2]);
+}
+
+void GuiCtrl::initC(){
+    doubleSpinBox_cx->setValue(Db::things[2][0]);
+    doubleSpinBox_cy->setValue(Db::things[2][1]);
+    doubleSpinBox_cz->setValue(Db::things[2][2]);
+}
+
+void GuiCtrl::initD(){
+    doubleSpinBox_dx->setValue(Db::things[3][0]);
+    doubleSpinBox_dy->setValue(Db::things[3][1]);
+    doubleSpinBox_dz->setValue(Db::things[3][2]);
 }
 
 void GuiCtrl::rotateX(){
@@ -95,21 +116,3 @@ void GuiCtrl::rotateZ(){
     rotation[2] = horizontalSlider_z->value();
     view.paintGL(1.0, rotation);
 }
-
-/*void GuiCtrl::initB(){
-    doubleSpinBox_bx = Db::things[0][1];
-    doubleSpinBox_by = Db::things[0][2];
-    doubleSpinBox_bz = Db::things[0][3];
-}
-
-void GuiCtrl::initC(){
-    doubleSpinBox_cx = Db::things[2][1];
-    doubleSpinBox_cy = Db::things[2][2];
-    doubleSpinBox_cz = Db::things[2][3];
-}
-
-void GuiCtrl::initD(){
-    doubleSpinBox_dx = Db::things[3][1];
-    doubleSpinBox_dy = Db::things[3][2];
-    doubleSpinBox_dz = Db::things[3][3];
-}*/
