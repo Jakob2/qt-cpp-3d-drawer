@@ -13,7 +13,7 @@ public:
 
     void initializeGL();
     //void paintGL();
-    void paintGL(float zoom);
+    void paintGL(float zoom, vector<int> rotation);
     void resizeGL(int w, int h, float centerX, float centerZ);
 
 private:

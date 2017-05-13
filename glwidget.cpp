@@ -10,18 +10,21 @@ GlWidget::GlWidget(QWidget * parent) : QGLWidget(parent){
     timer.start(16);
 }
 
-
 void GlWidget::initializeGL(){
-    glClearColor(0, 0, 0, 1);
+    glClearColor(0,0,0,1);
     glEnable(GL_DEPTH_TEST);
     Db db;
 }
 
-void GlWidget::paintGL(float zoom){
+void GlWidget::paintGL(float zoom, vector<int> rotation){
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+    /*glScalef(zoom, zoom, zoom);
+    glRotated(rotation[0], 1,0,0);
+    glRotated(rotation[1], 0,1,0);
+    glRotated(rotation[2], 0,0,1);*/
     vector<float> rgb;
     rgb = {1,0,0};
-    this->four(Db::things, rgb, zoom);
+    this->four(Db::things, rgb, rotation);
 }
 
 void GlWidget::resizeGL(int w, int h, float centerX, float centerZ){

@@ -7,9 +7,12 @@ Shapes::Shapes(){
 
 }
 
-void Shapes::four(vector<vector<float> >things, vector<float> rgb, float zoom){
-    glScalef(zoom, zoom, zoom);
+void Shapes::four(vector<vector<float> >things, vector<float> rgb, vector<int> rotation){
+    glMatrixMode(GL_MODELVIEW);
     glPushMatrix();
+    glRotatef(rotation[0], 1,0,0);
+    glRotatef(rotation[1], 0,1,0);
+    glRotatef(rotation[2], 0,0,1);
     glBegin(GL_POLYGON);
         glColor3f(rgb[0], rgb[1], rgb[2]);
         glVertex3f(things[0][0], things[0][1], things[0][2]);

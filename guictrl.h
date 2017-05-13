@@ -20,6 +20,9 @@ public slots:
     void zoom();
     void parts();
     void choosePart();
+    void rotateX();
+    void rotateY();
+    void rotateZ();
 
 private:
     GlWidget view;
@@ -27,6 +30,8 @@ private:
     vector<float> east = {-0.5, -0.5};
     vector<float> south = {0.5, -0.5};
     vector<float> west = {0.5, 0.5};
+
+    vector<int> rotation = {0,0,0};
 
     void initA();
     void initB();

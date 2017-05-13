@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>600</width>
-    <height>429</height>
+    <width>615</width>
+    <height>432</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -224,6 +224,12 @@
       <height>29</height>
      </rect>
     </property>
+    <property name="maximum">
+     <number>360</number>
+    </property>
+    <property name="pageStep">
+     <number>1</number>
+    </property>
     <property name="orientation">
      <enum>Qt::Horizontal</enum>
     </property>
@@ -237,6 +243,12 @@
       <height>29</height>
      </rect>
     </property>
+    <property name="maximum">
+     <number>360</number>
+    </property>
+    <property name="pageStep">
+     <number>1</number>
+    </property>
     <property name="orientation">
      <enum>Qt::Horizontal</enum>
     </property>
@@ -249,6 +261,12 @@
       <width>160</width>
       <height>29</height>
      </rect>
+    </property>
+    <property name="maximum">
+     <number>360</number>
+    </property>
+    <property name="pageStep">
+     <number>1</number>
     </property>
     <property name="orientation">
      <enum>Qt::Horizontal</enum>
@@ -381,7 +399,7 @@
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>600</width>
+     <width>615</width>
      <height>25</height>
     </rect>
    </property>
