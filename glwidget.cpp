@@ -18,8 +18,8 @@ void GlWidget::initializeGL(){
 
 void GlWidget::paintGL(float zoom, vector<int> rotation){
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-    /*glScalef(zoom, zoom, zoom);
-    glRotated(rotation[0], 1,0,0);
+    glScalef(zoom, zoom, zoom);
+    /*glRotated(rotation[0], 1,0,0);
     glRotated(rotation[1], 0,1,0);
     glRotated(rotation[2], 0,0,1);*/
     vector<float> rgb;

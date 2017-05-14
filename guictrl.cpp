@@ -9,11 +9,30 @@ GuiCtrl::GuiCtrl(){
 void GuiCtrl::connectGUI(){
     QObject::connect(dial_compass, SIGNAL(valueChanged(int)), this, SLOT(compass()));
     QObject::connect(dial_zoom, SIGNAL(valueChanged(int)), this, SLOT(zoom()));
+
     QObject::connect(comboBox_name, SIGNAL(currentIndexChanged(int)), this, SLOT(parts()));
     QObject::connect(comboBox_part, SIGNAL(currentIndexChanged(int)), this, SLOT(choosePart()));
+
     QObject::connect(horizontalSlider_x, SIGNAL(valueChanged(int)), this, SLOT(rotateX()));
     QObject::connect(horizontalSlider_y, SIGNAL(valueChanged(int)), this, SLOT(rotateY()));
     QObject::connect(horizontalSlider_z, SIGNAL(valueChanged(int)), this, SLOT(rotateZ()));
+
+    QObject::connect(doubleSpinBox_ax, SIGNAL(valueChanged(double)), this, SLOT(alterA()));
+    QObject::connect(doubleSpinBox_ay, SIGNAL(valueChanged(double)), this, SLOT(alterA()));
+    QObject::connect(doubleSpinBox_az, SIGNAL(valueChanged(double)), this, SLOT(alterA()));
+
+    QObject::connect(doubleSpinBox_bx, SIGNAL(valueChanged(double)), this, SLOT(alterB()));
+    QObject::connect(doubleSpinBox_by, SIGNAL(valueChanged(double)), this, SLOT(alterB()));
+    QObject::connect(doubleSpinBox_bz, SIGNAL(valueChanged(double)), this, SLOT(alterB()));
+
+    QObject::connect(doubleSpinBox_cx, SIGNAL(valueChanged(double)), this, SLOT(alterC()));
+    QObject::connect(doubleSpinBox_cy, SIGNAL(valueChanged(double)), this, SLOT(alterC()));
+    QObject::connect(doubleSpinBox_cz, SIGNAL(valueChanged(double)), this, SLOT(alterC()));
+
+    QObject::connect(doubleSpinBox_dx, SIGNAL(valueChanged(double)), this, SLOT(alterD()));
+    QObject::connect(doubleSpinBox_dy, SIGNAL(valueChanged(double)), this, SLOT(alterD()));
+    QObject::connect(doubleSpinBox_dz, SIGNAL(valueChanged(double)), this, SLOT(alterD()));
+
 }
 
 void GuiCtrl::compass(){
@@ -114,5 +133,33 @@ void GuiCtrl::rotateY(){
 
 void GuiCtrl::rotateZ(){
     rotation[2] = horizontalSlider_z->value();
+    view.paintGL(1.0, rotation);
+}
+
+void GuiCtrl::alterA(){
+    Db::things[0][0] = doubleSpinBox_ax->value();
+    Db::things[0][1] = doubleSpinBox_ay->value();
+    Db::things[0][2] = doubleSpinBox_az->value();
+    view.paintGL(1.0, rotation);
+}
+
+void GuiCtrl::alterB(){
+    Db::things[1][0] = doubleSpinBox_bx->value();
+    Db::things[1][1] = doubleSpinBox_by->value();
+    Db::things[1][2] = doubleSpinBox_bz->value();
+    view.paintGL(1.0, rotation);
+}
+
+void GuiCtrl::alterC(){
+    Db::things[2][0] = doubleSpinBox_cx->value();
+    Db::things[2][1] = doubleSpinBox_cy->value();
+    Db::things[2][2] = doubleSpinBox_cz->value();
+    view.paintGL(1.0, rotation);
+}
+
+void GuiCtrl::alterD(){
+    Db::things[3][0] = doubleSpinBox_dx->value();
+    Db::things[3][1] = doubleSpinBox_dy->value();
+    Db::things[3][2] = doubleSpinBox_dz->value();
     view.paintGL(1.0, rotation);
 }

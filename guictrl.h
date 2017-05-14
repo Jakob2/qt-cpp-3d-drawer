@@ -18,11 +18,18 @@ public:
 public slots:
     void compass();
     void zoom();
+
     void parts();
     void choosePart();
+
     void rotateX();
     void rotateY();
     void rotateZ();
+
+    void alterA();
+    void alterB();
+    void alterC();
+    void alterD();
 
 private:
     GlWidget view;
@@ -38,7 +45,7 @@ private:
     void initC();
     void initD();
 
-    float ax;
+    /*float ax;
     float ay;
     float az;
 
@@ -52,7 +59,7 @@ private:
 
     float dx;
     float dy;
-    float dz;
+    float dz;*/
 };
 
 #endif // GUICTRL_H
