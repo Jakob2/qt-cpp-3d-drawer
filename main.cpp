@@ -14,7 +14,7 @@ int main(int argc, char *argv[])
     guiCtrl.setupUi(w);
     w->show();
     guiCtrl.connectGUI();
-    guiCtrl.compass();
+    //guiCtrl.compass();
     guiCtrl.zoom();
     guiCtrl.addNames();
 
@@ -23,7 +23,6 @@ int main(int argc, char *argv[])
     style.b(guiCtrl);
     style.c(guiCtrl);
     style.d(guiCtrl);
-
 
     return a.exec();
 }

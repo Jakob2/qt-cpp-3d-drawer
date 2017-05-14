@@ -16,7 +16,6 @@ public:
     void addParts();
 
 public slots:
-    void compass();
     void zoom();
 
     void parts();

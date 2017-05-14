@@ -12,9 +12,8 @@ public:
     explicit GlWidget(QWidget * parent = 0);
 
     void initializeGL();
-    //void paintGL();
     void paintGL(float zoom, vector<int> rotation);
-    void resizeGL(int w, int h, float centerX, float centerZ);
+    void resizeGL(int w, int h);
 
 private:
     QTimer timer;

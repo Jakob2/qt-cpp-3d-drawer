@@ -1,10 +1,10 @@
 #ifndef STYLE
 #define STYLE
 
- #include <QDoubleSpinBox>
+#include <QDoubleSpinBox>
 #include "guictrl.h"
 
-class Style// : public GuiCtrl
+class Style
 {
 public:
     void a(GuiCtrl &gui);

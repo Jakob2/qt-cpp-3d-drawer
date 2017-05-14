@@ -11,7 +11,7 @@ GlWidget::GlWidget(QWidget * parent) : QGLWidget(parent){
 }
 
 void GlWidget::initializeGL(){
-    glClearColor(0,0,0,1);
+    glClearColor(0.5,0.5,0.5,1);
     glEnable(GL_DEPTH_TEST);
     Db db;
 }
@@ -22,10 +22,10 @@ void GlWidget::paintGL(float zoom, vector<int> rotation){
     this->four(Db::things, rotation);
 }
 
-void GlWidget::resizeGL(int w, int h, float centerX, float centerZ){
+void GlWidget::resizeGL(int w, int h){
     glViewport(0,0,w,h);
     glMatrixMode(GL_PROJECTION);
     glLoadIdentity();
-    gluPerspective(0.0, (float)w/(float)h, 0.01, 40.0);
-    gluLookAt(0.0,0.0,0.0, centerX,1.0,centerZ, 0,1,0);
+    gluPerspective(0.0, (float)w/(float)h, 0.01, 100.0);
+    gluLookAt(0.0,0.0,0.0, 0.5,1.0,0.5, 0,1,0);
 }

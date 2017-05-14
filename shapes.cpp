@@ -1,6 +1,7 @@
 #include "shapes.h"
 #include <GL/freeglut.h>
 #include <iostream>
+//#include <QGLWidget>
 using namespace std;
 
 Shapes::Shapes(){
@@ -23,5 +24,18 @@ void Shapes::four(vector<vector<float> >things, vector<int> rotation){
         glColor3f(1,1,0);
         glVertex3f(things[3][0], things[3][1], things[3][2]);
     glEnd();
+    axes();
     glPopMatrix();
+}
+
+void Shapes::axes(){
+    glBegin(GL_LINES);
+    glColor3f(0,0,0);
+        glVertex3f(0,0,0);
+        glVertex3f(3,0,0);
+        glVertex3f(0,0,0);
+        glVertex3f(0,3,0);
+        glVertex3f(0,0,0);
+        glVertex3f(0,0,3);
+    glEnd();
 }

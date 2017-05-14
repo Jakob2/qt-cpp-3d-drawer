@@ -7,7 +7,6 @@ GuiCtrl::GuiCtrl(){
 }
 
 void GuiCtrl::connectGUI(){
-    QObject::connect(dial_compass, SIGNAL(valueChanged(int)), this, SLOT(compass()));
     QObject::connect(dial_zoom, SIGNAL(valueChanged(int)), this, SLOT(zoom()));
 
     QObject::connect(comboBox_name, SIGNAL(currentIndexChanged(int)), this, SLOT(parts()));
@@ -35,36 +34,18 @@ void GuiCtrl::connectGUI(){
 
 }
 
-void GuiCtrl::compass(){
-    switch(dial_compass->value()){
-    case 0:
-        view.resizeGL(391, 361, north[0], north[1]);
-        view.paintGL(1.0, rotation);
-         break;
-    case 1:
-        view.resizeGL(391, 361, east[0], east[1]);
-        view.paintGL(1.0, rotation);
-        break;
-    case 2:
-        view.resizeGL(391, 361, south[0], south[1]);
-        view.paintGL(1.0, rotation);
-        break;
-    case 3:
-        view.resizeGL(391, 361, west[0], west[1]);
-        view.paintGL(1.0, rotation);
-        break;
-    }
-}
-
 void GuiCtrl::zoom(){
     switch(dial_zoom->value()){
     case 0:
+        view.resizeGL(391,361);
         view.paintGL(0.5, rotation);
         break;
     case 1:
+        view.resizeGL(391,361);
         view.paintGL(1.0, rotation);
         break;
     case 2:
+        view.resizeGL(391,361);
         view.paintGL(2.0, rotation);
         break;
     }
