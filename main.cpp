@@ -2,6 +2,7 @@
 #include <QApplication>
 #include "guictrl.h"
 #include "GL/freeglut.h"
+#include "style.h"
 
 int main(int argc, char *argv[])
 {
@@ -16,6 +17,13 @@ int main(int argc, char *argv[])
     guiCtrl.compass();
     guiCtrl.zoom();
     guiCtrl.addNames();
+
+    Style style;
+    style.a(guiCtrl);
+    style.b(guiCtrl);
+    style.c(guiCtrl);
+    style.d(guiCtrl);
+
 
     return a.exec();
 }

@@ -17,13 +17,15 @@ SOURCES += main.cpp\
     glwidget.cpp \
     shapes.cpp \
     db.cpp \
-    guictrl.cpp
+    guictrl.cpp \
+    style.cpp
 
 HEADERS  += mainwindow.h \
     glwidget.h \
     shapes.h \
     db.h \
-    guictrl.h
+    guictrl.h \
+    style.h
 
 FORMS    += mainwindow.ui
 
