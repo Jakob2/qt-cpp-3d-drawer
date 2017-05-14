@@ -23,3 +23,25 @@ void Style::d(GuiCtrl &gui){
     gui.doubleSpinBox_dy->setStyleSheet("QDoubleSpinBox { background-color: gold }");
     gui.doubleSpinBox_dz->setStyleSheet("QDoubleSpinBox { background-color: gold }");
 }
+
+void Style::x(GuiCtrl &gui){
+    gui.label_x->setStyleSheet("QLabel { color: red }");
+}
+
+void Style::y(GuiCtrl &gui){
+    gui.label_y->setStyleSheet("QLabel { color: green }");
+}
+
+void Style::z(GuiCtrl &gui){
+    gui.label_z->setStyleSheet("QLabel { color: blue }");
+}
+
+void Style::colorize(GuiCtrl &gui){
+    a(gui);
+    b(gui);
+    c(gui);
+    d(gui);
+    x(gui);
+    y(gui);
+    z(gui);
+}

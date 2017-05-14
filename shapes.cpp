@@ -30,11 +30,13 @@ void Shapes::four(vector<vector<float> >things, vector<int> rotation){
 
 void Shapes::axes(){
     glBegin(GL_LINES);
-    glColor3f(0,0,0);
+        glColor3f(1,0,0);
         glVertex3f(0,0,0);
         glVertex3f(3,0,0);
+        glColor3f(0,1,0);
         glVertex3f(0,0,0);
         glVertex3f(0,3,0);
+        glColor3f(0,0,1);
         glVertex3f(0,0,0);
         glVertex3f(0,0,3);
     glEnd();

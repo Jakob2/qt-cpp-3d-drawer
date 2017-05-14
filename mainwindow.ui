@@ -266,8 +266,11 @@
       <height>29</height>
      </rect>
     </property>
+    <property name="minimum">
+     <number>-180</number>
+    </property>
     <property name="maximum">
-     <number>360</number>
+     <number>180</number>
     </property>
     <property name="pageStep">
      <number>1</number>
@@ -285,8 +288,11 @@
       <height>29</height>
      </rect>
     </property>
+    <property name="minimum">
+     <number>-180</number>
+    </property>
     <property name="maximum">
-     <number>360</number>
+     <number>180</number>
     </property>
     <property name="pageStep">
      <number>1</number>
@@ -304,8 +310,11 @@
       <height>29</height>
      </rect>
     </property>
+    <property name="minimum">
+     <number>-180</number>
+    </property>
     <property name="maximum">
-     <number>360</number>
+     <number>180</number>
     </property>
     <property name="pageStep">
      <number>1</number>
@@ -314,7 +323,7 @@
      <enum>Qt::Horizontal</enum>
     </property>
    </widget>
-   <widget class="QLabel" name="label_5">
+   <widget class="QLabel" name="label_x">
     <property name="geometry">
      <rect>
       <x>410</x>
@@ -327,7 +336,7 @@
      <string>X</string>
     </property>
    </widget>
-   <widget class="QLabel" name="label_6">
+   <widget class="QLabel" name="label_y">
     <property name="geometry">
      <rect>
       <x>410</x>
@@ -340,7 +349,7 @@
      <string>Y</string>
     </property>
    </widget>
-   <widget class="QLabel" name="label_7">
+   <widget class="QLabel" name="label_z">
     <property name="geometry">
      <rect>
       <x>410</x>
@@ -399,7 +408,7 @@
      </rect>
     </property>
     <property name="text">
-     <string>save</string>
+     <string>&amp;save</string>
     </property>
    </widget>
    <widget class="QComboBox" name="comboBox_name">
@@ -422,7 +431,7 @@
      </rect>
     </property>
     <property name="text">
-     <string>new</string>
+     <string>&amp;new</string>
     </property>
    </widget>
    <widget class="QPushButton" name="pushButton_3">
@@ -435,7 +444,7 @@
      </rect>
     </property>
     <property name="text">
-     <string>del</string>
+     <string>&amp;del</string>
     </property>
    </widget>
   </widget>

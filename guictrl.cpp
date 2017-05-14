@@ -70,12 +70,12 @@ void GuiCtrl::addParts(){
 }
 
 void GuiCtrl::choosePart(){
-    this->selectThings(comboBox_name->currentText(), comboBox_part->currentText());
-    view.paintGL(1.0, rotation);
     initA();
     initB();
     initC();
     initD();
+    this->selectThings(comboBox_name->currentText(), comboBox_part->currentText());
+    view.paintGL(1.0, rotation);
 }
 
 void GuiCtrl::initA(){
