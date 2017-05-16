@@ -31,6 +31,8 @@ public slots:
     void alterD();
 
     void newPart();
+    void savePart();
+
 private:
     GlWidget view;
     vector<float> north = {-0.5, 0.5};
@@ -45,21 +47,7 @@ private:
     void initC();
     void initD();
 
-    /*float ax;
-    float ay;
-    float az;
-
-    float bx;
-    float by;
-    float bz;
-
-    float cx;
-    float cy;
-    float cz;
-
-    float dx;
-    float dy;
-    float dz;*/
+    vector<vector<QString>> convertThings();
 };
 
 #endif // GUICTRL_H

@@ -33,6 +33,7 @@ void GuiCtrl::connectGUI(){
     QObject::connect(doubleSpinBox_dz, SIGNAL(valueChanged(double)), this, SLOT(alterD()));
 
     QObject::connect(pushButton_new, SIGNAL(pressed()), this, SLOT(newPart()));
+    QObject::connect(pushButton_save, SIGNAL(pressed()), this, SLOT(savePart()));
 
 }
 
@@ -151,4 +152,19 @@ void GuiCtrl::newPart(){
     addPart(comboBox_name->currentText());
     selectParts(comboBox_name->currentText());
     addParts();
+}
+
+void GuiCtrl::savePart(){
+    savePartSQL(comboBox_name->currentText(), comboBox_part->currentText(), convertThings());
+}
+
+vector<vector<QString>> GuiCtrl::convertThings(){
+    vector<vector<QString>> res;
+    res.resize(4*3);
+    for(int i=0; i<(int)Db::things.size(); i++){
+        for(int j=0; j<(int)Db::things[i].size(); j++){
+            res[i].push_back(QString::number(Db::things[i][j]));
+        }
+    }
+    return res;
 }

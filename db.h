@@ -24,7 +24,13 @@ public:
 public slots:
     void deletePart(QString name, QString part);
     void addPart(QString name);
-    void savePart(QString name, QString part);
+    void savePartSQL(QString name, QString part, vector<vector<QString>> things);
+
+private:
+    void updateA(QString name, QString part, QString x, QString y, QString z);
+    void updateB(QString name, QString part, QString x, QString y, QString z);
+    void updateC(QString name, QString part, QString x, QString y, QString z);
+    void updateD(QString name, QString part, QString x, QString y, QString z);
 
 };
 

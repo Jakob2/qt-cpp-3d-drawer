@@ -95,7 +95,7 @@ void Db::addPart(QString name){
     QString newPart;
     QSqlQuery query;
     if(query.exec("SELECT MAX(part) FROM poly WHERE name="+name+"")) cout<<"max part selected"<<endl;
-    else qDebug()<<"delete error: "<<query.lastError()<<" / "<<query.lastQuery();
+    else qDebug()<<"max part error: "<<query.lastError()<<" / "<<query.lastQuery();
     while(query.next()){
         maxPart = query.value(0).toInt();
     }
@@ -106,8 +106,37 @@ void Db::addPart(QString name){
     else qDebug()<<"insert part error: "<<query.lastError()<<" / "<<query.lastQuery();
 }
 
-void Db::savePart(QString name, QString part){
+void Db::updateA(QString name, QString part,QString x, QString y, QString z){
+    QSqlQuery query;
+    if(query.exec("UPDATE poly SET ax="+x+", ay="+y+", az="+z+" WHERE name="+name+" AND part="+part+"")) cout<<"updated A"<<endl;
+    else qDebug()<<"update A error: "<<query.lastError()<<" / "<<query.lastQuery();
 
 }
 
+void Db::updateB(QString name, QString part,QString x, QString y, QString z){
+    QSqlQuery query;
+    if(query.exec("UPDATE poly SET bx="+x+", by="+y+", bz="+z+" WHERE name="+name+" AND part="+part+"")) cout<<"updated B"<<endl;
+    else qDebug()<<"update B error: "<<query.lastError()<<" / "<<query.lastQuery();
 
+}
+
+void Db::updateC(QString name, QString part,QString x, QString y, QString z){
+    QSqlQuery query;
+    if(query.exec("UPDATE poly SET cx="+x+", cy="+y+", cz="+z+" WHERE name="+name+" AND part="+part+"")) cout<<"updated C"<<endl;
+    else qDebug()<<"update C error: "<<query.lastError()<<" / "<<query.lastQuery();
+
+}
+
+void Db::updateD(QString name, QString part,QString x, QString y, QString z){
+    QSqlQuery query;
+    if(query.exec("UPDATE poly SET dx="+x+", dy="+y+", dz="+z+" WHERE name="+name+" AND part="+part+"")) cout<<"updated D"<<endl;
+    else qDebug()<<"update D error: "<<query.lastError()<<" / "<<query.lastQuery();
+
+}
+
+void Db::savePartSQL(QString name, QString part, vector<vector<QString>> things){
+    updateA(name, part, things[0][0], things[0][1], things[0][2]);
+    updateB(name, part, things[1][0], things[1][1], things[1][2]);
+    updateC(name, part, things[2][0], things[2][1], things[2][2]);
+    updateD(name, part, things[3][0], things[3][1], things[3][2]);
+}
