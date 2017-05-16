@@ -398,7 +398,7 @@
      </property>
     </item>
    </widget>
-   <widget class="QPushButton" name="pushButton">
+   <widget class="QPushButton" name="pushButton_save">
     <property name="geometry">
      <rect>
       <x>560</x>
@@ -421,7 +421,7 @@
      </rect>
     </property>
    </widget>
-   <widget class="QPushButton" name="pushButton_2">
+   <widget class="QPushButton" name="pushButton_new">
     <property name="geometry">
      <rect>
       <x>510</x>
@@ -434,7 +434,7 @@
      <string>&amp;new</string>
     </property>
    </widget>
-   <widget class="QPushButton" name="pushButton_3">
+   <widget class="QPushButton" name="pushButton_del">
     <property name="geometry">
      <rect>
       <x>460</x>

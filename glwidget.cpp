@@ -19,7 +19,7 @@ void GlWidget::initializeGL(){
 void GlWidget::paintGL(float zoom, vector<int> rotation){
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
     glScalef(zoom, zoom, zoom);
-    this->four(Db::things, rotation);
+    four(Db::things, rotation);
 }
 
 void GlWidget::resizeGL(int w, int h){

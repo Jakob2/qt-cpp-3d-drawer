@@ -36,7 +36,7 @@ void Db::selectThings(QString name, QString part){
     Db::things.clear();
     QSqlQuery query;
     if(query.exec("SELECT ax,ay,az, bx,by,bz, cx,cy,cz, dx,dy,dz FROM poly WHERE name ='"+name+"' AND part ='"+part+"'")) cout<<"selected"<<endl;
-    else qDebug()<<"insert error: "<<query.lastError()<<" / "<<query.lastQuery();
+    else qDebug()<<"select error: "<<query.lastError()<<" / "<<query.lastQuery();
     while(query.next()){
         Db::things.resize(4*3);
 
@@ -83,15 +83,31 @@ void Db::selectParts(QString name){
     }
 }
 
-/*void Db::upsertSQL(float a, float b, float c, float d, float name){
-    bool find = false;
+void Db::deletePart(QString name, QString part){
     QSqlQuery query;
-    if(query.exec("SELECT "+name+" FROM poly")) cout<<"upsert selected"<<endl;
+    if(query.exec("DELETE FROM poly WHERE name="+name+" AND part="+part+"")) cout<<"part deleted"<<endl;
+    else qDebug()<<"delete error: "<<query.lastError()<<" / "<<query.lastQuery();
+}
+
+void Db::addPart(QString name){
+    int maxPart;
+    QVariant tmp;
+    QString newPart;
+    QSqlQuery query;
+    if(query.exec("SELECT MAX(part) FROM poly WHERE name="+name+"")) cout<<"max part selected"<<endl;
+    else qDebug()<<"delete error: "<<query.lastError()<<" / "<<query.lastQuery();
     while(query.next()){
-        find = true;
+        maxPart = query.value(0).toInt();
     }
-    if(find) query.exec("UPDATE poly SET a ="+a+" AND b="+b+" AND c="+c+" AND d="+d+" WHERE name = "+name);
-    else query.exec("INSERT INTO poly (a,b,c,d,name) VALUES ("+a+","+b+","+c+","+d+","+name+")");
-}*/
+    maxPart += 1;
+    tmp = maxPart;
+    newPart = tmp.toString();
+    if(query.exec("INSERT INTO poly(name, part, ax,ay,az, bx,by,bz, cx,cy,cz, dx,dy,dz) VALUES ('"+name+"', '"+newPart+"', '0','0','0', '0','0','0', '0','0','0', '0','0','0')")) cout<<"new part inserted"<<endl;
+    else qDebug()<<"insert part error: "<<query.lastError()<<" / "<<query.lastQuery();
+}
+
+void Db::savePart(QString name, QString part){
+
+}
 
 

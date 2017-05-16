@@ -30,6 +30,7 @@ public slots:
     void alterC();
     void alterD();
 
+    void newPart();
 private:
     GlWidget view;
     vector<float> north = {-0.5, 0.5};

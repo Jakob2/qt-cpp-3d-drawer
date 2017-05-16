@@ -32,6 +32,8 @@ void GuiCtrl::connectGUI(){
     QObject::connect(doubleSpinBox_dy, SIGNAL(valueChanged(double)), this, SLOT(alterD()));
     QObject::connect(doubleSpinBox_dz, SIGNAL(valueChanged(double)), this, SLOT(alterD()));
 
+    QObject::connect(pushButton_new, SIGNAL(pressed()), this, SLOT(newPart()));
+
 }
 
 void GuiCtrl::zoom(){
@@ -58,8 +60,8 @@ void GuiCtrl::addNames(){
 }
 
 void GuiCtrl::parts(){
-    this->selectParts(comboBox_name->currentText());
-    this->addParts();
+    selectParts(comboBox_name->currentText());
+    addParts();
 }
 
 void GuiCtrl::addParts(){
@@ -74,7 +76,7 @@ void GuiCtrl::choosePart(){
     initB();
     initC();
     initD();
-    this->selectThings(comboBox_name->currentText(), comboBox_part->currentText());
+    if(comboBox_part->count()) selectThings(comboBox_name->currentText(), comboBox_part->currentText());
     view.paintGL(1.0, rotation);
 }
 
@@ -143,4 +145,10 @@ void GuiCtrl::alterD(){
     Db::things[3][1] = doubleSpinBox_dy->value();
     Db::things[3][2] = doubleSpinBox_dz->value();
     view.paintGL(1.0, rotation);
+}
+
+void GuiCtrl::newPart(){
+    addPart(comboBox_name->currentText());
+    selectParts(comboBox_name->currentText());
+    addParts();
 }
