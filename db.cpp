@@ -89,7 +89,7 @@ void Db::deletePart(QString name, QString part){
     else qDebug()<<"delete error: "<<query.lastError()<<" / "<<query.lastQuery();
 }
 
-void Db::addPart(QString name){
+void Db::addPartSQL(QString name){
     int maxPart;
     QVariant tmp;
     QString newPart;
@@ -110,28 +110,24 @@ void Db::updateA(QString name, QString part,QString x, QString y, QString z){
     QSqlQuery query;
     if(query.exec("UPDATE poly SET ax="+x+", ay="+y+", az="+z+" WHERE name="+name+" AND part="+part+"")) cout<<"updated A"<<endl;
     else qDebug()<<"update A error: "<<query.lastError()<<" / "<<query.lastQuery();
-
 }
 
 void Db::updateB(QString name, QString part,QString x, QString y, QString z){
     QSqlQuery query;
     if(query.exec("UPDATE poly SET bx="+x+", by="+y+", bz="+z+" WHERE name="+name+" AND part="+part+"")) cout<<"updated B"<<endl;
     else qDebug()<<"update B error: "<<query.lastError()<<" / "<<query.lastQuery();
-
 }
 
 void Db::updateC(QString name, QString part,QString x, QString y, QString z){
     QSqlQuery query;
     if(query.exec("UPDATE poly SET cx="+x+", cy="+y+", cz="+z+" WHERE name="+name+" AND part="+part+"")) cout<<"updated C"<<endl;
     else qDebug()<<"update C error: "<<query.lastError()<<" / "<<query.lastQuery();
-
 }
 
 void Db::updateD(QString name, QString part,QString x, QString y, QString z){
     QSqlQuery query;
     if(query.exec("UPDATE poly SET dx="+x+", dy="+y+", dz="+z+" WHERE name="+name+" AND part="+part+"")) cout<<"updated D"<<endl;
     else qDebug()<<"update D error: "<<query.lastError()<<" / "<<query.lastQuery();
-
 }
 
 void Db::savePartSQL(QString name, QString part, vector<vector<QString>> things){
@@ -139,4 +135,10 @@ void Db::savePartSQL(QString name, QString part, vector<vector<QString>> things)
     updateB(name, part, things[1][0], things[1][1], things[1][2]);
     updateC(name, part, things[2][0], things[2][1], things[2][2]);
     updateD(name, part, things[3][0], things[3][1], things[3][2]);
+}
+
+void Db::deletePartSQL(QString name, QString part){
+    QSqlQuery query;
+    if(query.exec("DELETE FROM poly WHERE name="+name+" AND part="+part+"")) cout<<"deleted part"<<endl;
+    else qDebug()<<"delete part error: "<<query.lastError()<<" / "<<query.lastQuery();
 }

@@ -34,7 +34,7 @@ void GuiCtrl::connectGUI(){
 
     QObject::connect(pushButton_new, SIGNAL(pressed()), this, SLOT(newPart()));
     QObject::connect(pushButton_save, SIGNAL(pressed()), this, SLOT(savePart()));
-
+    QObject::connect(pushButton_del, SIGNAL(pressed()), this, SLOT(deletePart()));
 }
 
 void GuiCtrl::zoom(){
@@ -149,7 +149,7 @@ void GuiCtrl::alterD(){
 }
 
 void GuiCtrl::newPart(){
-    addPart(comboBox_name->currentText());
+    addPartSQL(comboBox_name->currentText());
     selectParts(comboBox_name->currentText());
     addParts();
 }
@@ -167,4 +167,10 @@ vector<vector<QString>> GuiCtrl::convertThings(){
         }
     }
     return res;
+}
+
+void GuiCtrl::deletePart(){
+    deletePartSQL(comboBox_name->currentText(), comboBox_part->currentText());
+    selectParts(comboBox_name->currentText());
+    addParts();
 }
