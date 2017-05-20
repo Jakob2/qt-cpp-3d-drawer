@@ -75,11 +75,11 @@ void GuiCtrl::addNames(){
     for(int i=0; i<(int)Db::names.size(); i++){
         comboBox_name->addItem(QString::number(Db::names[i]));
     }
+    //selectConstruct(comboBox_name->currentText());
     //textBrowser->append(notif);
 }
 
 void GuiCtrl::parts(){
-    cout<<"PARTS"<<endl;
     selectParts(comboBox_name->currentText());
     addParts();
     //textBrowser->append(selPart);
@@ -90,6 +90,7 @@ void GuiCtrl::addParts(){
     for(int i=0; i<(int)Db::parts.size(); i++){
         comboBox_part->addItem(QString::number(Db::parts[i]));
     }
+    //choosePart();
 }
 
 void GuiCtrl::choosePart(){
@@ -99,7 +100,7 @@ void GuiCtrl::choosePart(){
     initB(comboBox_part->currentText());
     initC(comboBox_part->currentText());
     initD(comboBox_part->currentText());
-    if(comboBox_part->count()) selectThings(comboBox_name->currentText(), comboBox_part->currentText());
+    //if(comboBox_part->count()) selectThings(comboBox_name->currentText(), comboBox_part->currentText());
     view.paintGL(1.0, rotation, comboBox_part->currentText());
     textBrowser->append(selPart);
 }

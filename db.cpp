@@ -45,6 +45,9 @@ void Db::setConstruct(int size){
         Db::construct.push_back(vector<vector<float>>());
         for(int j=0; j<4; j++){
             Db::construct[i].push_back(vector<float>());
+            for(int k=0; k<3; k++){
+             Db::construct[i][j].push_back(0);
+            }
         }
     }
 }
@@ -56,32 +59,6 @@ void Db::setThings(){
         for(int j=0; j<3; j++){
             Db::things[i].push_back(0);
         }
-    }
-}
-
-void Db::selectThings(QString name, QString part){
-    Db::things.clear();
-    QSqlQuery query;
-    if(query.exec("SELECT ax,ay,az, bx,by,bz, cx,cy,cz, dx,dy,dz FROM poly WHERE name ='"+name+"' AND part ='"+part+"'")) cout<<"selected"<<endl;
-    else qDebug()<<"select error: "<<query.lastError()<<" / "<<query.lastQuery();
-    while(query.next()){
-        Db::things.resize(4*3);
-
-        Db::things[0].push_back(query.value(0).toFloat());
-        Db::things[0].push_back(query.value(1).toFloat());
-        Db::things[0].push_back(query.value(2).toFloat());
-
-        Db::things[1].push_back(query.value(3).toFloat());
-        Db::things[1].push_back(query.value(4).toFloat());
-        Db::things[1].push_back(query.value(5).toFloat());
-
-        Db::things[2].push_back(query.value(6).toFloat());
-        Db::things[2].push_back(query.value(7).toFloat());
-        Db::things[2].push_back(query.value(8).toFloat());
-
-        Db::things[3].push_back(query.value(9).toFloat());
-        Db::things[3].push_back(query.value(10).toFloat());
-        Db::things[3].push_back(query.value(11).toFloat());
     }
 }
 
@@ -97,21 +74,22 @@ void Db::selectConstruct(QString name){
     if(query.exec("SELECT ax,ay,az, bx,by,bz, cx,cy,cz, dx,dy,dz FROM poly WHERE name="+name+"")) cout<<"construct selected"<<endl;
     else qDebug()<<"construct error: "<<query.lastError()<<" / "<<query.lastQuery();
     while(query.next()){
-        Db::construct[index][0].push_back(query.value(0).toFloat());
-        Db::construct[index][0].push_back(query.value(1).toFloat());
-        Db::construct[index][0].push_back(query.value(2).toFloat());
+        Db::construct[index][0][0] = query.value(0).toFloat();
+        Db::construct[index][0][1] = query.value(1).toFloat();
+        Db::construct[index][0][2] = query.value(2).toFloat();
 
-        Db::construct[index][1].push_back(query.value(3).toFloat());
-        Db::construct[index][1].push_back(query.value(4).toFloat());
-        Db::construct[index][1].push_back(query.value(5).toFloat());
+        Db::construct[index][1][0] = query.value(3).toFloat();
+        Db::construct[index][1][1] = query.value(4).toFloat();
+        Db::construct[index][1][2] = query.value(5).toFloat();
 
-        Db::construct[index][2].push_back(query.value(6).toFloat());
-        Db::construct[index][2].push_back(query.value(7).toFloat());
-        Db::construct[index][2].push_back(query.value(8).toFloat());
+        Db::construct[index][2][0] = query.value(6).toFloat();
+        Db::construct[index][2][1] = query.value(7).toFloat();
+        Db::construct[index][2][2] = query.value(8).toFloat();
 
-        Db::construct[index][3].push_back(query.value(9).toFloat());
-        Db::construct[index][3].push_back(query.value(10).toFloat());
-        Db::construct[index][3].push_back(query.value(11).toFloat());
+        Db::construct[index][3][0] = query.value(9).toFloat();
+        Db::construct[index][3][1] = query.value(10).toFloat();
+        Db::construct[index][3][2] = query.value(11).toFloat();
+
         index++;
     }
 }
@@ -130,17 +108,6 @@ void Db::selectParts(QString name){
         Db::parts.push_back(query.value(0).toInt());
     }
 }
-
-/*void Db::deletePart(QString name, QString part){
-    QSqlQuery query;
-    if(query.exec("DELETE FROM poly WHERE name="+name+" AND part="+part+"")){
-        notifD = "Part deleted.";
-        cout<<"part deleted"<<endl;
-    }else{
-        notifD = "Part delete error.";
-        qDebug()<<"delete error: "<<query.lastError()<<" / "<<query.lastQuery();
-    }
-}*/
 
 void Db::addPartSQL(QString name){
     int maxPart;
@@ -208,14 +175,8 @@ void Db::updateD(QString name, QString part,QString x, QString y, QString z){
     }
 }
 
-//void Db::savePartSQL(QString name, QString part, vector<vector<QString>> things){
 void Db::savePartSQL(QString name, QString part, vector<vector<vector<QString>>> construct){
-    int i = part.toInt();
-    /*updateA(name, part, things[i][0][0], things[i][0][1], things[i][0][2]);
-    updateB(name, part, things[i][1][0], things[i][1][1], things[i][1][2]);
-    updateC(name, part, things[i][2][0], things[i][2][1], things[i][2][2]);
-    updateD(name, part, things[i][3][0], things[i][3][1], things[i][3][2]);*/
-
+    //int i = part.toInt();
     updateA(name, part, construct[0][0][0], construct[0][0][1], construct[0][0][2]);
     updateB(name, part, construct[0][1][0], construct[0][1][1], construct[0][1][2]);
     updateC(name, part, construct[0][2][0], construct[0][2][1], construct[0][2][2]);
@@ -233,5 +194,3 @@ void Db::deletePartSQL(QString name, QString part){
         qDebug()<<"delete part error: "<<query.lastError()<<" / "<<query.lastQuery();
     }
 }
-
-

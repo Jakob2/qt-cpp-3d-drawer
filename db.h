@@ -14,7 +14,6 @@ public:
 
     void connectSQL();
 
-    void selectThings(QString name, QString part);
     void selectNames();
     void selectParts(QString name);
     void selectConstruct(QString name);
@@ -24,13 +23,7 @@ public:
     static vector<int> names;
     static vector<int> parts;
 
-    QString notif;
-    QString notifD;
-
-public slots:
-    //void deletePart(QString name, QString part);
     void addPartSQL(QString name);
-    //void savePartSQL(QString name, QString part, vector<vector<QString>> things);
     void savePartSQL(QString name, QString part, vector<vector<vector<QString>>> construct);
     void deletePartSQL(QString name, QString part);
 
