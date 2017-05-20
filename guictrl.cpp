@@ -39,21 +39,22 @@ void GuiCtrl::connectGUI(){
     QObject::connect(pushButton_save, SIGNAL(pressed()), this, SLOT(savePart()));
     QObject::connect(pushButton_del, SIGNAL(pressed()), this, SLOT(deletePart()));
     QObject::connect(pushButton_name, SIGNAL(pressed()), this, SLOT(newName()));
+    QObject::connect(pushButton_delName, SIGNAL(pressed()), this, SLOT(delName()));
 }
 
 void GuiCtrl::zoom(){
     switch(dial_zoom->value()){
     case 0:
         view.resizeGL(391,361);
-        view.paintGL(0.5, rotation, comboBox_part->currentText());
+        view.paintGL(0.25, rotation, comboBox_part->currentText());
         break;
     case 1:
         view.resizeGL(391,361);
-        view.paintGL(1.0, rotation, comboBox_part->currentText());
+        view.paintGL(0.5, rotation, comboBox_part->currentText());
         break;
     case 2:
         view.resizeGL(391,361);
-        view.paintGL(0.25, rotation, comboBox_part->currentText());
+        view.paintGL(1.0, rotation, comboBox_part->currentText());
         break;
     }
 }
@@ -74,6 +75,7 @@ void GuiCtrl::rotateZ(){
 }
 
 void GuiCtrl::addNames(){
+    comboBox_name->clear();
     for(int i=0; i<(int)Db::names.size(); i++){
         comboBox_name->addItem(QString::number(Db::names[i]));
     }
@@ -236,8 +238,25 @@ void GuiCtrl::deletePart(){
     selectParts(comboBox_name->currentText());
     addParts();
     textBrowser->append(delPart);
+    textBrowser->append(resPart);
 }
 
 void GuiCtrl::newName(){
+    QObject::disconnect(comboBox_name, SIGNAL(currentIndexChanged(int)), this, SLOT(parts()));
+    QObject::disconnect(comboBox_part, SIGNAL(currentIndexChanged(int)), this, SLOT(choosePart()));
+    addName();
+    selectNames();
+    addNames();
+    QObject::connect(comboBox_name, SIGNAL(currentIndexChanged(int)), this, SLOT(parts()));
+    QObject::connect(comboBox_part, SIGNAL(currentIndexChanged(int)), this, SLOT(choosePart()));
+}
 
+void GuiCtrl::delName(){
+    QObject::disconnect(comboBox_name, SIGNAL(currentIndexChanged(int)), this, SLOT(parts()));
+    QObject::disconnect(comboBox_part, SIGNAL(currentIndexChanged(int)), this, SLOT(choosePart()));
+    removeName(comboBox_name->currentText());
+    selectNames();
+    addNames();
+    QObject::connect(comboBox_name, SIGNAL(currentIndexChanged(int)), this, SLOT(parts()));
+    QObject::connect(comboBox_part, SIGNAL(currentIndexChanged(int)), this, SLOT(choosePart()));
 }

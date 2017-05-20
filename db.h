@@ -26,8 +26,9 @@ public:
     void addPartSQL(QString name);
     void savePartSQL(QString name, QString part, vector<vector<vector<QString>>> construct);
     void deletePartSQL(QString name, QString part);
-
     void resetPartsSQL(QString name);
+    void addName();
+    void removeName(QString name);
 
 private:
     void updateA(QString name, QString part, QString x, QString y, QString z);

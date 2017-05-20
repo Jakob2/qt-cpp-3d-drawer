@@ -35,6 +35,7 @@ public slots:
     void savePart();
     void deletePart();
     void newName();
+    void delName();
 
 private:
     GlWidget view;

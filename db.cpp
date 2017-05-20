@@ -204,6 +204,35 @@ void Db::resetPartsSQL(QString name){
     QString ni;
     for(int i=0; i<(int)oldIndex.size(); i++){
         ni = QString::number(i);
-        if(query.exec("UPDATE poly SET part="+ni+" WHERE name="+name+" AND part="+oldIndex[i]+"")) cout<<"new "<<i<<" index updated"<<endl;
+        if(query.exec("UPDATE poly SET part="+ni+" WHERE name="+name+" AND part="+oldIndex[i]+"")){
+            resPart = "Part indexes resetted.";
+            cout<<"new "<<i<<" index updated"<<endl;
+        }else{
+            resPart = "Part indexes reset error.";
+            qDebug()<<"reset parts error: "<<query.lastError()<<" / "<<query.lastQuery();
+        }
     }
+}
+
+void Db::addName(){
+    QVariant max;
+    QString maxName;
+    QSqlQuery query;
+    if(query.exec("SELECT MAX(name) FROM poly")) cout<<"names selected"<<endl;
+    else qDebug()<<"select names error: "<<query.lastError()<<" / "<<query.lastQuery();
+    while(query.next()){
+        max = query.value(0).toInt();
+    }
+    int z = max.toInt();
+    z++;
+    max = z;
+    maxName = max.toString();
+    if(query.exec("INSERT INTO poly (name, part, ax,ay,az, bx,by,bz, cx,cy,cz,dx,dy,dz) VALUES ("+maxName+",0, 0,0,0, 0,0,0, 0,0,0, 0,0,0)")) cout<<"name added"<<endl;
+    else qDebug()<<"add name error: "<<query.lastError()<<" / "<<query.lastQuery();
+}
+
+void Db::removeName(QString name){
+    QSqlQuery query;
+    if(query.exec("DELETE FROM poly WHERE name="+name+"")) cout<<"name deleted"<<endl;
+    else qDebug()<<"delete name error: "<<query.lastError()<<" / "<<query.lastQuery();
 }
