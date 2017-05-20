@@ -41,3 +41,21 @@ void Shapes::axes(){
         glVertex3f(0,0,3);
     glEnd();
 }
+
+void Shapes::complex(vector<vector<vector<float> > > construct, vector<int> rotation){
+    glMatrixMode(GL_MODELVIEW);
+    glPushMatrix();
+    glRotatef(rotation[0], 1,0,0);
+    glRotatef(rotation[1], 0,1,0);
+    glRotatef(rotation[2], 0,0,1);
+    glColor3f(1,0,0);
+    for(int i=0; i<(int)construct.size(); i++){
+        glBegin(GL_POLYGON);
+            glVertex3f(construct[i][0][0], construct[i][0][1], construct[i][0][2]);
+            glVertex3f(construct[i][1][0], construct[i][1][1], construct[i][1][2]);
+            glVertex3f(construct[i][2][0], construct[i][2][1], construct[i][2][2]);
+            glVertex3f(construct[i][3][0], construct[i][3][1], construct[i][3][2]);
+        glEnd();
+    }
+    glPopMatrix();
+}

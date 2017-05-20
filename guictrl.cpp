@@ -78,6 +78,7 @@ void GuiCtrl::choosePart(){
     initC();
     initD();
     if(comboBox_part->count()) selectThings(comboBox_name->currentText(), comboBox_part->currentText());
+    selectConstruct(comboBox_name->currentText());
     view.paintGL(1.0, rotation);
 }
 

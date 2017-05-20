@@ -10,6 +10,7 @@ public:
     Shapes();
     void four(vector<vector<float> > things, vector<int> rotation);
     void axes();
+    void complex(vector<vector<vector<float>>> construct, vector<int> rotation);
 };
 
 #endif // SHAPES_H

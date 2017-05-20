@@ -10,19 +10,16 @@
 #include <vector>
 using namespace std;
 
-vector<vector<float> > Db::things;
+vector<vector<float>> Db::things;
+vector<vector<vector<float>>> Db::construct;
 vector<int> Db::names;
 vector<int> Db::parts;
 
 Db::Db(){
-    this->connectSQL();
-    this->selectNames();
-    Db::things.resize(4*3);
-    for(int i=0; i<4; i++){
-        for(int j=0; j<3; j++){
-            Db::things[i].push_back(0);
-        }
-    }
+    connectSQL();
+    selectNames();
+    setThings();
+    setConstruct(1);
 }
 
 void Db::connectSQL(){
@@ -30,6 +27,36 @@ void Db::connectSQL(){
     m_db.setDatabaseName("/home/ok/jakob/QT4/DATABASES/3dg");
     if(!m_db.open()) cout<< "Error: connection with database fail"<<endl;
     else cout<< "Database: connection ok"<<endl;
+}
+
+void Db::selectNames(){
+    Db::names.clear();
+    QSqlQuery query;
+    if(query.exec("SELECT DISTINCT name FROM poly")) cout<<"names selected"<<endl;
+    else qDebug()<<"insert error: "<<query.lastError()<<" / "<<query.lastQuery();
+    while(query.next()){
+        Db::names.push_back(query.value(0).toInt());
+    }
+}
+
+void Db::setConstruct(int size){
+    Db::construct.clear();
+    for(int i=0; i<size; i++){
+        Db::construct.push_back(vector<vector<float>>());
+        for(int j=0; j<4; j++){
+            Db::construct[i].push_back(vector<float>());
+        }
+    }
+}
+
+void Db::setThings(){
+    Db::things.clear();
+    for(int i=0; i<4; i++){
+        Db::things.push_back(vector<float>());
+        for(int j=0; j<3; j++){
+            Db::things[i].push_back(0);
+        }
+    }
 }
 
 void Db::selectThings(QString name, QString part){
@@ -56,20 +83,36 @@ void Db::selectThings(QString name, QString part){
         Db::things[3].push_back(query.value(10).toFloat());
         Db::things[3].push_back(query.value(11).toFloat());
     }
-    /*for(int i=0; i<(int)Db::things.size(); i++){
-        for(int j=0; j<(int)Db::things[i].size(); j++){
-            cout<<Db::things[i][j]<<endl;
-        }
-    }*/
 }
 
-void Db::selectNames(){
-    Db::names.clear();
+void Db::selectConstruct(QString name){
+    int range;
+    Db::construct.clear();
     QSqlQuery query;
-    if(query.exec("SELECT DISTINCT name FROM poly")) cout<<"names selected"<<endl;
-    else qDebug()<<"insert error: "<<query.lastError()<<" / "<<query.lastQuery();
+    if(query.exec("SELECT COUNT(*) FROM poly WHERE name="+name+"")) cout<<"construct range selected"<<endl;
+    else qDebug()<<"construct range error: "<<query.lastError()<<" / "<<query.lastQuery();
+    while(query.next()) range = query.value(0).toInt();
+    setConstruct(range);
+    int index = 0;
+    if(query.exec("SELECT ax,ay,az, bx,by,bz, cx,cy,cz, dx,dy,dz FROM poly WHERE name="+name+"")) cout<<"construct selected"<<endl;
+    else qDebug()<<"construct error: "<<query.lastError()<<" / "<<query.lastQuery();
     while(query.next()){
-        Db::names.push_back(query.value(0).toInt());
+        Db::construct[index][0].push_back(query.value(0).toFloat());
+        Db::construct[index][0].push_back(query.value(1).toFloat());
+        Db::construct[index][0].push_back(query.value(2).toFloat());
+
+        Db::construct[index][1].push_back(query.value(3).toFloat());
+        Db::construct[index][1].push_back(query.value(4).toFloat());
+        Db::construct[index][1].push_back(query.value(5).toFloat());
+
+        Db::construct[index][2].push_back(query.value(6).toFloat());
+        Db::construct[index][2].push_back(query.value(7).toFloat());
+        Db::construct[index][2].push_back(query.value(8).toFloat());
+
+        Db::construct[index][3].push_back(query.value(9).toFloat());
+        Db::construct[index][3].push_back(query.value(10).toFloat());
+        Db::construct[index][3].push_back(query.value(11).toFloat());
+        index++;
     }
 }
 
@@ -142,3 +185,4 @@ void Db::deletePartSQL(QString name, QString part){
     if(query.exec("DELETE FROM poly WHERE name="+name+" AND part="+part+"")) cout<<"deleted part"<<endl;
     else qDebug()<<"delete part error: "<<query.lastError()<<" / "<<query.lastQuery();
 }
+

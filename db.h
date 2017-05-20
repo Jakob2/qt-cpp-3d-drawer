@@ -16,8 +16,10 @@ public:
     void selectThings(QString name, QString part);
     void selectNames();
     void selectParts(QString name);
+    void selectConstruct(QString name);
 
     static vector<vector<float> > things;
+    static vector<vector<vector<float>>> construct;
     static vector<int> names;
     static vector<int> parts;
 
@@ -32,6 +34,9 @@ private:
     void updateB(QString name, QString part, QString x, QString y, QString z);
     void updateC(QString name, QString part, QString x, QString y, QString z);
     void updateD(QString name, QString part, QString x, QString y, QString z);
+
+    void setConstruct(int size);
+    void setThings();
 
 };
 
