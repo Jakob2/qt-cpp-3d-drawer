@@ -69,32 +69,11 @@ void Db::selectConstruct(QString name){
     if(query.exec("SELECT COUNT(*) FROM poly WHERE name="+name+"")) cout<<"construct range selected"<<endl;
     else qDebug()<<"construct range error: "<<query.lastError()<<" / "<<query.lastQuery();
     while(query.next()) range = query.value(0).toInt();
-    //cout<<"RANGE: "<<range<<endl;
     setConstruct(range);
     int index = 0;
-    //int q = 0;
     if(query.exec("SELECT ax,ay,az, bx,by,bz, cx,cy,cz, dx,dy,dz FROM poly WHERE name="+name+"")) cout<<"construct selected"<<endl;
     else qDebug()<<"construct error: "<<query.lastError()<<" / "<<query.lastQuery();
-    //int f = 0;
     while(query.next()){
-        /*for(int f=0; f<12; f++){
-            cout<<index<<"/"<<f<<"/"<<query.value(f).toFloat()<<endl;
-            //Db::construct[index][f][] = query.value(f).toFloat();
-        }
-        index++;'*/
-
-        //f++;
-    //query.next();
-        //cout<<"index: "<<index<<"q: "<<q<<"val: "<<query.value(0).toFloat()<<endl;
-        /*for(int index=0; index<3; index++){
-        cout<<"LOOP: "<<index<<endl;
-            //for(int j=0; j<4; j++){
-                for(int k=0; k<12; k++){
-                    cout<<index<<"/"<<k<<"/"<<query.value(k).toFloat()<<endl;
-                }
-            }
-        }*/
-
         Db::construct[index][0][0] = query.value(0).toFloat();
         Db::construct[index][0][1] = query.value(1).toFloat();
         Db::construct[index][0][2] = query.value(2).toFloat();
@@ -111,32 +90,15 @@ void Db::selectConstruct(QString name){
         Db::construct[index][3][1] = query.value(10).toFloat();
         Db::construct[index][3][2] = query.value(11).toFloat();
 
-        /*Db::construct[0][0][0] = query.value(0).toFloat();
-        Db::construct[0][0][1] = query.value(1).toFloat();
-        Db::construct[0][0][2] = query.value(2).toFloat();
-
-        Db::construct[0][1][0] = query.value(3).toFloat();
-        Db::construct[0][1][1] = query.value(4).toFloat();
-        Db::construct[0][1][2] = query.value(5).toFloat();
-
-        Db::construct[0][2][0] = query.value(6).toFloat();
-        Db::construct[0][2][1] = query.value(7).toFloat();
-        Db::construct[0][2][2] = query.value(8).toFloat();
-
-        Db::construct[0][3][0] = query.value(9).toFloat();
-        Db::construct[0][3][1] = query.value(10).toFloat();
-        Db::construct[0][3][2] = query.value(11).toFloat();*/
-
         index++;
-        //q += 12;
     }
-    for(int i=0; i<(int)Db::construct.size(); i++){
+    /*for(int i=0; i<(int)Db::construct.size(); i++){
         for(int j=0; j<(int)Db::construct[i].size(); j++){
             for(int k=0; k<(int)Db::construct[i][j].size(); k++){
                 cout<<i<<"/"<<j<<"/"<<k<<"/"<<Db::construct[i][j][k]<<endl;
             }
         }
-    }
+    }*/
 }
 
 void Db::selectParts(QString name){
@@ -228,5 +190,20 @@ void Db::deletePartSQL(QString name, QString part){
     }else{
         delPart = "Delete error.";
         qDebug()<<"delete part error: "<<query.lastError()<<" / "<<query.lastQuery();
+    }
+}
+
+void Db::resetPartsSQL(QString name){
+    vector<QString> oldIndex;
+    QSqlQuery query;
+    if(query.exec("SELECT part FROM poly WHERE name="+name+"")) cout<<"reset parts selected"<<endl;
+    else qDebug()<<"reset parts select error: "<<query.lastError()<<" / "<<query.lastQuery();
+    while(query.next()){
+        oldIndex.push_back(query.value(0).toString());
+    }
+    QString ni;
+    for(int i=0; i<(int)oldIndex.size(); i++){
+        ni = QString::number(i);
+        if(query.exec("UPDATE poly SET part="+ni+" WHERE name="+name+" AND part="+oldIndex[i]+"")) cout<<"new "<<i<<" index updated"<<endl;
     }
 }

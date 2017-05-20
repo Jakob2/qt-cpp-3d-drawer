@@ -17,6 +17,7 @@ int main(int argc, char *argv[])
     guiCtrl.connectGUI();
     guiCtrl.zoom();
     guiCtrl.addNames();
+    guiCtrl.textBrowser->append("Application start. Don't forget to save your changes.");
 
     Style style;
     style.colorize(guiCtrl);

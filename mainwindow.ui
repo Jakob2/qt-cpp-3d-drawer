@@ -470,6 +470,19 @@
      <string>RadioButton</string>
     </property>
    </widget>
+   <widget class="QPushButton" name="pushButton_name">
+    <property name="geometry">
+     <rect>
+      <x>410</x>
+      <y>340</y>
+      <width>41</width>
+      <height>27</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>+</string>
+    </property>
+   </widget>
   </widget>
   <widget class="QMenuBar" name="menuBar">
    <property name="geometry">
