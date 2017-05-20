@@ -2,6 +2,8 @@
 #include <iostream>
 using namespace std;
 
+int modPart;
+
 GuiCtrl::GuiCtrl(){
     GlWidget view;
 }
@@ -54,6 +56,21 @@ void GuiCtrl::zoom(){
     }
 }
 
+void GuiCtrl::rotateX(){
+    rotation[0] = horizontalSlider_x->value();
+    view.paintGL(1.0, rotation, comboBox_part->currentText());
+}
+
+void GuiCtrl::rotateY(){
+    rotation[1] = horizontalSlider_y->value();
+    view.paintGL(1.0, rotation, comboBox_part->currentText());
+}
+
+void GuiCtrl::rotateZ(){
+    rotation[2] = horizontalSlider_z->value();
+    view.paintGL(1.0, rotation, comboBox_part->currentText());
+}
+
 void GuiCtrl::addNames(){
     for(int i=0; i<(int)Db::names.size(); i++){
         comboBox_name->addItem(QString::number(Db::names[i]));
@@ -73,79 +90,69 @@ void GuiCtrl::addParts(){
 }
 
 void GuiCtrl::choosePart(){
-    initA();
-    initB();
-    initC();
-    initD();
-    if(comboBox_part->count()) selectThings(comboBox_name->currentText(), comboBox_part->currentText());
+    modPart = comboBox_part->currentText().toInt();
     selectConstruct(comboBox_name->currentText());
+    initA(comboBox_name->currentText());
+    initB(comboBox_name->currentText());
+    initC(comboBox_name->currentText());
+    initD(comboBox_name->currentText());
+    if(comboBox_part->count()) selectThings(comboBox_name->currentText(), comboBox_part->currentText());
     view.paintGL(1.0, rotation, comboBox_part->currentText());
 }
 
-void GuiCtrl::initA(){
-    doubleSpinBox_ax->setValue(Db::things[0][0]);
-    doubleSpinBox_ay->setValue(Db::things[0][1]);
-    doubleSpinBox_az->setValue(Db::things[0][2]);
+void GuiCtrl::initA(QString name){
+    int n = name.toInt();
+    doubleSpinBox_ax->setValue(Db::construct[n][0][0]);
+    doubleSpinBox_ay->setValue(Db::construct[n][0][1]);
+    doubleSpinBox_az->setValue(Db::construct[n][0][2]);
 }
 
-void GuiCtrl::initB(){
-    doubleSpinBox_bx->setValue(Db::things[1][0]);
-    doubleSpinBox_by->setValue(Db::things[1][1]);
-    doubleSpinBox_bz->setValue(Db::things[1][2]);
+void GuiCtrl::initB(QString name){
+    int n = name.toInt();
+    doubleSpinBox_bx->setValue(Db::construct[n][1][0]);
+    doubleSpinBox_by->setValue(Db::construct[n][1][1]);
+    doubleSpinBox_bz->setValue(Db::construct[n][1][2]);
 }
 
-void GuiCtrl::initC(){
-    doubleSpinBox_cx->setValue(Db::things[2][0]);
-    doubleSpinBox_cy->setValue(Db::things[2][1]);
-    doubleSpinBox_cz->setValue(Db::things[2][2]);
+void GuiCtrl::initC(QString name){
+    int n = name.toInt();
+    doubleSpinBox_cx->setValue(Db::construct[n][2][0]);
+    doubleSpinBox_cy->setValue(Db::construct[n][2][1]);
+    doubleSpinBox_cz->setValue(Db::construct[n][2][2]);
 }
 
-void GuiCtrl::initD(){
-    doubleSpinBox_dx->setValue(Db::things[3][0]);
-    doubleSpinBox_dy->setValue(Db::things[3][1]);
-    doubleSpinBox_dz->setValue(Db::things[3][2]);
-}
-
-void GuiCtrl::rotateX(){
-    rotation[0] = horizontalSlider_x->value();
-    view.paintGL(1.0, rotation, comboBox_part->currentText());
-}
-
-void GuiCtrl::rotateY(){
-    rotation[1] = horizontalSlider_y->value();
-    view.paintGL(1.0, rotation, comboBox_part->currentText());
-}
-
-void GuiCtrl::rotateZ(){
-    rotation[2] = horizontalSlider_z->value();
-    view.paintGL(1.0, rotation, comboBox_part->currentText());
+void GuiCtrl::initD(QString name){
+    int n = name.toInt();
+    doubleSpinBox_dx->setValue(Db::construct[n][3][0]);
+    doubleSpinBox_dy->setValue(Db::construct[n][3][1]);
+    doubleSpinBox_dz->setValue(Db::construct[n][3][2]);
 }
 
 void GuiCtrl::alterA(){
-    Db::things[0][0] = doubleSpinBox_ax->value();
-    Db::things[0][1] = doubleSpinBox_ay->value();
-    Db::things[0][2] = doubleSpinBox_az->value();
+    Db::construct[modPart][0][0] = doubleSpinBox_ax->value();
+    Db::construct[modPart][0][1] = doubleSpinBox_ay->value();
+    Db::construct[modPart][0][2] = doubleSpinBox_az->value();
     view.paintGL(1.0, rotation, comboBox_part->currentText());
 }
 
 void GuiCtrl::alterB(){
-    Db::things[1][0] = doubleSpinBox_bx->value();
-    Db::things[1][1] = doubleSpinBox_by->value();
-    Db::things[1][2] = doubleSpinBox_bz->value();
+    Db::construct[modPart][1][0] = doubleSpinBox_bx->value();
+    Db::construct[modPart][1][1] = doubleSpinBox_by->value();
+    Db::construct[modPart][1][2] = doubleSpinBox_bz->value();
     view.paintGL(1.0, rotation, comboBox_part->currentText());
 }
 
 void GuiCtrl::alterC(){
-    Db::things[2][0] = doubleSpinBox_cx->value();
-    Db::things[2][1] = doubleSpinBox_cy->value();
-    Db::things[2][2] = doubleSpinBox_cz->value();
+    Db::construct[modPart][2][0] = doubleSpinBox_cx->value();
+    Db::construct[modPart][2][1] = doubleSpinBox_cy->value();
+    Db::construct[modPart][2][2] = doubleSpinBox_cz->value();
     view.paintGL(1.0, rotation, comboBox_part->currentText());
 }
 
 void GuiCtrl::alterD(){
-    Db::things[3][0] = doubleSpinBox_dx->value();
-    Db::things[3][1] = doubleSpinBox_dy->value();
-    Db::things[3][2] = doubleSpinBox_dz->value();
+    Db::construct[modPart][3][0] = doubleSpinBox_dx->value();
+    Db::construct[modPart][3][1] = doubleSpinBox_dy->value();
+    Db::construct[modPart][3][2] = doubleSpinBox_dz->value();
     view.paintGL(1.0, rotation, comboBox_part->currentText());
 }
 

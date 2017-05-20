@@ -4,6 +4,8 @@
 #include "GL/freeglut.h"
 #include "style.h"
 
+extern int modPart;
+
 int main(int argc, char *argv[])
 {
     glutInit(&argc, argv);
