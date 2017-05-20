@@ -23,7 +23,7 @@ void GlWidget::paintGL(float zoom, vector<int> rotation, QString current){
     glScalef(zoom, zoom, zoom);
     int c = current.toInt();
     if(Db::construct.size()>1) complex(Db::construct, rotation, c);
-    four(Db::things, rotation);
+    //four(Db::things, rotation);
 }
 
 void GlWidget::resizeGL(int w, int h){
