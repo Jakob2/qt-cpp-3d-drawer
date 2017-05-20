@@ -44,10 +44,10 @@ private:
 
     vector<int> rotation = {0,0,0};
 
-    void initA(QString name);
-    void initB(QString name);
+    void initA(QString part);
+    void initB(QString part);
     void initC(QString name);
-    void initD(QString name);
+    void initD(QString part);
 
     vector<vector<QString>> convertThings();
     vector<vector<vector<QString>>> convertConstruct(int index);

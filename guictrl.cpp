@@ -95,39 +95,39 @@ void GuiCtrl::addParts(){
 void GuiCtrl::choosePart(){
     modPart = comboBox_part->currentText().toInt();
     selectConstruct(comboBox_name->currentText());
-    initA(comboBox_name->currentText());
-    initB(comboBox_name->currentText());
-    initC(comboBox_name->currentText());
-    initD(comboBox_name->currentText());
+    initA(comboBox_part->currentText());
+    initB(comboBox_part->currentText());
+    initC(comboBox_part->currentText());
+    initD(comboBox_part->currentText());
     if(comboBox_part->count()) selectThings(comboBox_name->currentText(), comboBox_part->currentText());
     view.paintGL(1.0, rotation, comboBox_part->currentText());
     textBrowser->append(selPart);
 }
 
-void GuiCtrl::initA(QString name){
-    int n = name.toInt();
+void GuiCtrl::initA(QString part){
+    int n = part.toInt();
     doubleSpinBox_ax->setValue(Db::construct[n][0][0]);
     doubleSpinBox_ay->setValue(Db::construct[n][0][1]);
     doubleSpinBox_az->setValue(Db::construct[n][0][2]);
     //textBrowser->append("point A initialized.");
 }
 
-void GuiCtrl::initB(QString name){
-    int n = name.toInt();
+void GuiCtrl::initB(QString part){
+    int n = part.toInt();
     doubleSpinBox_bx->setValue(Db::construct[n][1][0]);
     doubleSpinBox_by->setValue(Db::construct[n][1][1]);
     doubleSpinBox_bz->setValue(Db::construct[n][1][2]);
 }
 
-void GuiCtrl::initC(QString name){
-    int n = name.toInt();
+void GuiCtrl::initC(QString part){
+    int n = part.toInt();
     doubleSpinBox_cx->setValue(Db::construct[n][2][0]);
     doubleSpinBox_cy->setValue(Db::construct[n][2][1]);
     doubleSpinBox_cz->setValue(Db::construct[n][2][2]);
 }
 
-void GuiCtrl::initD(QString name){
-    int n = name.toInt();
+void GuiCtrl::initD(QString part){
+    int n = part.toInt();
     doubleSpinBox_dx->setValue(Db::construct[n][3][0]);
     doubleSpinBox_dy->setValue(Db::construct[n][3][1]);
     doubleSpinBox_dz->setValue(Db::construct[n][3][2]);
