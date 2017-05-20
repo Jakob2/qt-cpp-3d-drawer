@@ -75,11 +75,14 @@ void GuiCtrl::addNames(){
     for(int i=0; i<(int)Db::names.size(); i++){
         comboBox_name->addItem(QString::number(Db::names[i]));
     }
+    //textBrowser->append(notif);
 }
 
 void GuiCtrl::parts(){
+    cout<<"PARTS"<<endl;
     selectParts(comboBox_name->currentText());
     addParts();
+    //textBrowser->append(selPart);
 }
 
 void GuiCtrl::addParts(){
@@ -98,6 +101,7 @@ void GuiCtrl::choosePart(){
     initD(comboBox_name->currentText());
     if(comboBox_part->count()) selectThings(comboBox_name->currentText(), comboBox_part->currentText());
     view.paintGL(1.0, rotation, comboBox_part->currentText());
+    textBrowser->append(selPart);
 }
 
 void GuiCtrl::initA(QString name){
@@ -105,6 +109,7 @@ void GuiCtrl::initA(QString name){
     doubleSpinBox_ax->setValue(Db::construct[n][0][0]);
     doubleSpinBox_ay->setValue(Db::construct[n][0][1]);
     doubleSpinBox_az->setValue(Db::construct[n][0][2]);
+    //textBrowser->append("point A initialized.");
 }
 
 void GuiCtrl::initB(QString name){
@@ -160,18 +165,38 @@ void GuiCtrl::newPart(){
     addPartSQL(comboBox_name->currentText());
     selectParts(comboBox_name->currentText());
     addParts();
+    textBrowser->append(addPart);
 }
 
 void GuiCtrl::savePart(){
-    savePartSQL(comboBox_name->currentText(), comboBox_part->currentText(), convertThings());
+    savePartSQL(comboBox_name->currentText(), comboBox_part->currentText(), convertConstruct(comboBox_part->currentText().toInt()));
+    textBrowser->append(savPart);
 }
 
 vector<vector<QString>> GuiCtrl::convertThings(){
     vector<vector<QString>> res;
     res.resize(4*3);
     for(int i=0; i<(int)Db::things.size(); i++){
-        for(int j=0; j<(int)Db::things[i].size(); j++){
+        for(int j=0; j<(int)Db::things[0].size(); j++){
             res[i].push_back(QString::number(Db::things[i][j]));
+        }
+    }
+    return res;
+}
+
+vector<vector<vector<QString>>> GuiCtrl::convertConstruct(int index){
+    vector<vector<vector<QString>>> res;
+    for(int i=0; i<1; i++){
+        res.push_back(vector<vector<QString>>());
+        for(int j=0; j<4; j++){
+            res[i].push_back(vector<QString>());
+        }
+    }
+    for(int i=0; i<1; i++){
+        for(int j=0; j<(int)Db::construct[i].size(); j++){
+            for(int k=0; k<(int)Db::construct[i][j].size(); k++){
+                res[i][j].push_back(QString::number(Db::construct[index][j][k]));
+            }
         }
     }
     return res;
@@ -181,4 +206,5 @@ void GuiCtrl::deletePart(){
     deletePartSQL(comboBox_name->currentText(), comboBox_part->currentText());
     selectParts(comboBox_name->currentText());
     addParts();
+    textBrowser->append(delPart);
 }

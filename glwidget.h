@@ -1,5 +1,5 @@
-#ifndef GLWIDGET_H
-#define GLWIDGET_H
+#ifndef GLWiDGET_H
+#define GLWiDGET_H
 
 #include <QGLWidget>
 #include <QTimer>
@@ -19,4 +19,4 @@ private:
     QTimer timer;
 };
 
-#endif // GLWIDGET_H
+#endif // GLWiDGET_H

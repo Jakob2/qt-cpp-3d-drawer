@@ -1,12 +1,13 @@
 #ifndef DB_H
 #define DB_H
 
+#include "log.h"
 #include <vector>
 #include <QtSql/QSqlQuery>
 #include <QObject>
 using namespace std;
 
-class Db
+class Db : public Log
 {
 public:
     Db();
@@ -23,10 +24,14 @@ public:
     static vector<int> names;
     static vector<int> parts;
 
+    QString notif;
+    QString notifD;
+
 public slots:
-    void deletePart(QString name, QString part);
+    //void deletePart(QString name, QString part);
     void addPartSQL(QString name);
-    void savePartSQL(QString name, QString part, vector<vector<QString>> things);
+    //void savePartSQL(QString name, QString part, vector<vector<QString>> things);
+    void savePartSQL(QString name, QString part, vector<vector<vector<QString>>> construct);
     void deletePartSQL(QString name, QString part);
 
 private:

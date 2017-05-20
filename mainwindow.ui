@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>615</width>
-    <height>432</height>
+    <height>526</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -445,6 +445,16 @@
     </property>
     <property name="text">
      <string>&amp;del</string>
+    </property>
+   </widget>
+   <widget class="QTextBrowser" name="textBrowser">
+    <property name="geometry">
+     <rect>
+      <x>10</x>
+      <y>370</y>
+      <width>391</width>
+      <height>91</height>
+     </rect>
     </property>
    </widget>
   </widget>

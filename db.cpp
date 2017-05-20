@@ -119,18 +119,28 @@ void Db::selectConstruct(QString name){
 void Db::selectParts(QString name){
     Db::parts.clear();
     QSqlQuery query;
-    if(query.exec("SELECT part FROM poly WHERE name ='"+name+"'")) cout<<"parts selected"<<endl;
-    else qDebug()<<"insert error: "<<query.lastError()<<" / "<<query.lastQuery();
+    if(query.exec("SELECT part FROM poly WHERE name ='"+name+"'")){
+        selPart = "New part selected. Unsaved changes are lost.";
+        cout<<"parts selected"<<endl;
+    }else{
+        selPart = "Select part error.";
+        qDebug()<<"select parts error: "<<query.lastError()<<" / "<<query.lastQuery();
+    }
     while(query.next()){
         Db::parts.push_back(query.value(0).toInt());
     }
 }
 
-void Db::deletePart(QString name, QString part){
+/*void Db::deletePart(QString name, QString part){
     QSqlQuery query;
-    if(query.exec("DELETE FROM poly WHERE name="+name+" AND part="+part+"")) cout<<"part deleted"<<endl;
-    else qDebug()<<"delete error: "<<query.lastError()<<" / "<<query.lastQuery();
-}
+    if(query.exec("DELETE FROM poly WHERE name="+name+" AND part="+part+"")){
+        notifD = "Part deleted.";
+        cout<<"part deleted"<<endl;
+    }else{
+        notifD = "Part delete error.";
+        qDebug()<<"delete error: "<<query.lastError()<<" / "<<query.lastQuery();
+    }
+}*/
 
 void Db::addPartSQL(QString name){
     int maxPart;
@@ -145,44 +155,83 @@ void Db::addPartSQL(QString name){
     maxPart += 1;
     tmp = maxPart;
     newPart = tmp.toString();
-    if(query.exec("INSERT INTO poly(name, part, ax,ay,az, bx,by,bz, cx,cy,cz, dx,dy,dz) VALUES ('"+name+"', '"+newPart+"', '0','0','0', '0','0','0', '0','0','0', '0','0','0')")) cout<<"new part inserted"<<endl;
-    else qDebug()<<"insert part error: "<<query.lastError()<<" / "<<query.lastQuery();
+    if(query.exec("INSERT INTO poly(name, part, ax,ay,az, bx,by,bz, cx,cy,cz, dx,dy,dz) VALUES ('"+name+"', '"+newPart+"', '0','0','0', '0','0','0', '0','0','0', '0','0','0')")){
+        addPart = "New part created.";
+        cout<<"new part inserted"<<endl;
+    }else{
+        addPart = "Create new part error";
+        qDebug()<<"insert part error: "<<query.lastError()<<" / "<<query.lastQuery();
+    }
 }
 
-void Db::updateA(QString name, QString part,QString x, QString y, QString z){
+void Db::updateA(QString name, QString part, QString x, QString y, QString z){
     QSqlQuery query;
-    if(query.exec("UPDATE poly SET ax="+x+", ay="+y+", az="+z+" WHERE name="+name+" AND part="+part+"")) cout<<"updated A"<<endl;
-    else qDebug()<<"update A error: "<<query.lastError()<<" / "<<query.lastQuery();
+    if(query.exec("UPDATE poly SET ax="+x+", ay="+y+", az="+z+" WHERE name="+name+" AND part="+part+"")){
+        //notif = "Point A updated.";
+        cout<<"updated A"<<endl;
+    }else{
+        //notif = "Update A error;";
+        qDebug()<<"update A error: "<<query.lastError()<<" / "<<query.lastQuery();
+    }
 }
 
 void Db::updateB(QString name, QString part,QString x, QString y, QString z){
     QSqlQuery query;
-    if(query.exec("UPDATE poly SET bx="+x+", by="+y+", bz="+z+" WHERE name="+name+" AND part="+part+"")) cout<<"updated B"<<endl;
-    else qDebug()<<"update B error: "<<query.lastError()<<" / "<<query.lastQuery();
+    if(query.exec("UPDATE poly SET bx="+x+", by="+y+", bz="+z+" WHERE name="+name+" AND part="+part+"")){
+        //notif = "Point B updated.";
+        cout<<"updated B"<<endl;
+    }else{
+        //notif = "Update B error.";
+        qDebug()<<"update B error: "<<query.lastError()<<" / "<<query.lastQuery();
+    }
 }
 
 void Db::updateC(QString name, QString part,QString x, QString y, QString z){
     QSqlQuery query;
-    if(query.exec("UPDATE poly SET cx="+x+", cy="+y+", cz="+z+" WHERE name="+name+" AND part="+part+"")) cout<<"updated C"<<endl;
-    else qDebug()<<"update C error: "<<query.lastError()<<" / "<<query.lastQuery();
+    if(query.exec("UPDATE poly SET cx="+x+", cy="+y+", cz="+z+" WHERE name="+name+" AND part="+part+"")){
+        //notif = "Point C updated.";
+        cout<<"updated C"<<endl;
+    }else{
+        //notif = "Update C error.";
+        qDebug()<<"update C error: "<<query.lastError()<<" / "<<query.lastQuery();
+    }
 }
 
 void Db::updateD(QString name, QString part,QString x, QString y, QString z){
     QSqlQuery query;
-    if(query.exec("UPDATE poly SET dx="+x+", dy="+y+", dz="+z+" WHERE name="+name+" AND part="+part+"")) cout<<"updated D"<<endl;
-    else qDebug()<<"update D error: "<<query.lastError()<<" / "<<query.lastQuery();
+    if(query.exec("UPDATE poly SET dx="+x+", dy="+y+", dz="+z+" WHERE name="+name+" AND part="+part+"")){
+        //notif = "point D updated.";
+        cout<<"updated D"<<endl;
+    }else{
+        //notif = "Update D error.";
+        qDebug()<<"update D error: "<<query.lastError()<<" / "<<query.lastQuery();
+    }
 }
 
-void Db::savePartSQL(QString name, QString part, vector<vector<QString>> things){
-    updateA(name, part, things[0][0], things[0][1], things[0][2]);
-    updateB(name, part, things[1][0], things[1][1], things[1][2]);
-    updateC(name, part, things[2][0], things[2][1], things[2][2]);
-    updateD(name, part, things[3][0], things[3][1], things[3][2]);
+//void Db::savePartSQL(QString name, QString part, vector<vector<QString>> things){
+void Db::savePartSQL(QString name, QString part, vector<vector<vector<QString>>> construct){
+    int i = part.toInt();
+    /*updateA(name, part, things[i][0][0], things[i][0][1], things[i][0][2]);
+    updateB(name, part, things[i][1][0], things[i][1][1], things[i][1][2]);
+    updateC(name, part, things[i][2][0], things[i][2][1], things[i][2][2]);
+    updateD(name, part, things[i][3][0], things[i][3][1], things[i][3][2]);*/
+
+    updateA(name, part, construct[0][0][0], construct[0][0][1], construct[0][0][2]);
+    updateB(name, part, construct[0][1][0], construct[0][1][1], construct[0][1][2]);
+    updateC(name, part, construct[0][2][0], construct[0][2][1], construct[0][2][2]);
+    updateD(name, part, construct[0][3][0], construct[0][3][1], construct[0][3][2]);
+    savPart = "Part "+part+" saved.";
 }
 
 void Db::deletePartSQL(QString name, QString part){
     QSqlQuery query;
-    if(query.exec("DELETE FROM poly WHERE name="+name+" AND part="+part+"")) cout<<"deleted part"<<endl;
-    else qDebug()<<"delete part error: "<<query.lastError()<<" / "<<query.lastQuery();
+    if(query.exec("DELETE FROM poly WHERE name="+name+" AND part="+part+"")){
+        delPart = "Part "+part+" deleted.";
+        cout<<"deleted part"<<endl;
+    }else{
+        delPart = "Delete error.";
+        qDebug()<<"delete part error: "<<query.lastError()<<" / "<<query.lastQuery();
+    }
 }
+
 

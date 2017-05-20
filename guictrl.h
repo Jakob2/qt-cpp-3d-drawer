@@ -1,6 +1,7 @@
-#ifndef GUICTRL_H
-#define GUICTRL_H
+#ifndef GUiCTRL_H
+#define GUiCTRL_H
 
+#include "log.h"
 #include <QDialog>
 #include "ui_mainwindow.h"
 #include "db.h"
@@ -49,6 +50,7 @@ private:
     void initD(QString name);
 
     vector<vector<QString>> convertThings();
+    vector<vector<vector<QString>>> convertConstruct(int index);
 };
 
-#endif // GUICTRL_H
+#endif // GUiCTRL_H
