@@ -3,7 +3,6 @@
 using namespace std;
 
 int modPart;
-//int display;
 extern int display;
 
 GuiCtrl::GuiCtrl(){
@@ -109,30 +108,54 @@ void GuiCtrl::choosePart(){
 
 void GuiCtrl::initA(QString part){
     int n = part.toInt();
+    QObject::disconnect(doubleSpinBox_ax, SIGNAL(valueChanged(double)), this, SLOT(alterA()));
+    QObject::disconnect(doubleSpinBox_ay, SIGNAL(valueChanged(double)), this, SLOT(alterA()));
+    QObject::disconnect(doubleSpinBox_az, SIGNAL(valueChanged(double)), this, SLOT(alterA()));
     doubleSpinBox_ax->setValue(Db::construct[n][0][0]);
     doubleSpinBox_ay->setValue(Db::construct[n][0][1]);
     doubleSpinBox_az->setValue(Db::construct[n][0][2]);
+    QObject::connect(doubleSpinBox_ax, SIGNAL(valueChanged(double)), this, SLOT(alterA()));
+    QObject::connect(doubleSpinBox_ay, SIGNAL(valueChanged(double)), this, SLOT(alterA()));
+    QObject::connect(doubleSpinBox_az, SIGNAL(valueChanged(double)), this, SLOT(alterA()));
 }
 
 void GuiCtrl::initB(QString part){
     int n = part.toInt();
+    QObject::disconnect(doubleSpinBox_bx, SIGNAL(valueChanged(double)), this, SLOT(alterB()));
+    QObject::disconnect(doubleSpinBox_by, SIGNAL(valueChanged(double)), this, SLOT(alterB()));
+    QObject::disconnect(doubleSpinBox_bz, SIGNAL(valueChanged(double)), this, SLOT(alterB()));
     doubleSpinBox_bx->setValue(Db::construct[n][1][0]);
     doubleSpinBox_by->setValue(Db::construct[n][1][1]);
     doubleSpinBox_bz->setValue(Db::construct[n][1][2]);
+    QObject::connect(doubleSpinBox_bx, SIGNAL(valueChanged(double)), this, SLOT(alterB()));
+    QObject::connect(doubleSpinBox_by, SIGNAL(valueChanged(double)), this, SLOT(alterB()));
+    QObject::connect(doubleSpinBox_bz, SIGNAL(valueChanged(double)), this, SLOT(alterB()));
 }
 
 void GuiCtrl::initC(QString part){
     int n = part.toInt();
+    QObject::disconnect(doubleSpinBox_cx, SIGNAL(valueChanged(double)), this, SLOT(alterC()));
+    QObject::disconnect(doubleSpinBox_cy, SIGNAL(valueChanged(double)), this, SLOT(alterC()));
+    QObject::disconnect(doubleSpinBox_cz, SIGNAL(valueChanged(double)), this, SLOT(alterC()));
     doubleSpinBox_cx->setValue(Db::construct[n][2][0]);
     doubleSpinBox_cy->setValue(Db::construct[n][2][1]);
     doubleSpinBox_cz->setValue(Db::construct[n][2][2]);
+    QObject::connect(doubleSpinBox_cx, SIGNAL(valueChanged(double)), this, SLOT(alterC()));
+    QObject::connect(doubleSpinBox_cy, SIGNAL(valueChanged(double)), this, SLOT(alterC()));
+    QObject::connect(doubleSpinBox_cz, SIGNAL(valueChanged(double)), this, SLOT(alterC()));
 }
 
 void GuiCtrl::initD(QString part){
     int n = part.toInt();
+    QObject::disconnect(doubleSpinBox_dx, SIGNAL(valueChanged(double)), this, SLOT(alterD()));
+    QObject::disconnect(doubleSpinBox_dy, SIGNAL(valueChanged(double)), this, SLOT(alterD()));
+    QObject::disconnect(doubleSpinBox_dz, SIGNAL(valueChanged(double)), this, SLOT(alterD()));
     doubleSpinBox_dx->setValue(Db::construct[n][3][0]);
     doubleSpinBox_dy->setValue(Db::construct[n][3][1]);
     doubleSpinBox_dz->setValue(Db::construct[n][3][2]);
+    QObject::connect(doubleSpinBox_dx, SIGNAL(valueChanged(double)), this, SLOT(alterD()));
+    QObject::connect(doubleSpinBox_dy, SIGNAL(valueChanged(double)), this, SLOT(alterD()));
+    QObject::connect(doubleSpinBox_dz, SIGNAL(valueChanged(double)), this, SLOT(alterD()));
 }
 
 void GuiCtrl::alterA(){

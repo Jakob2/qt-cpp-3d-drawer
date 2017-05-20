@@ -69,11 +69,32 @@ void Db::selectConstruct(QString name){
     if(query.exec("SELECT COUNT(*) FROM poly WHERE name="+name+"")) cout<<"construct range selected"<<endl;
     else qDebug()<<"construct range error: "<<query.lastError()<<" / "<<query.lastQuery();
     while(query.next()) range = query.value(0).toInt();
+    //cout<<"RANGE: "<<range<<endl;
     setConstruct(range);
     int index = 0;
+    //int q = 0;
     if(query.exec("SELECT ax,ay,az, bx,by,bz, cx,cy,cz, dx,dy,dz FROM poly WHERE name="+name+"")) cout<<"construct selected"<<endl;
     else qDebug()<<"construct error: "<<query.lastError()<<" / "<<query.lastQuery();
+    //int f = 0;
     while(query.next()){
+        /*for(int f=0; f<12; f++){
+            cout<<index<<"/"<<f<<"/"<<query.value(f).toFloat()<<endl;
+            //Db::construct[index][f][] = query.value(f).toFloat();
+        }
+        index++;'*/
+
+        //f++;
+    //query.next();
+        //cout<<"index: "<<index<<"q: "<<q<<"val: "<<query.value(0).toFloat()<<endl;
+        /*for(int index=0; index<3; index++){
+        cout<<"LOOP: "<<index<<endl;
+            //for(int j=0; j<4; j++){
+                for(int k=0; k<12; k++){
+                    cout<<index<<"/"<<k<<"/"<<query.value(k).toFloat()<<endl;
+                }
+            }
+        }*/
+
         Db::construct[index][0][0] = query.value(0).toFloat();
         Db::construct[index][0][1] = query.value(1).toFloat();
         Db::construct[index][0][2] = query.value(2).toFloat();
@@ -90,7 +111,31 @@ void Db::selectConstruct(QString name){
         Db::construct[index][3][1] = query.value(10).toFloat();
         Db::construct[index][3][2] = query.value(11).toFloat();
 
+        /*Db::construct[0][0][0] = query.value(0).toFloat();
+        Db::construct[0][0][1] = query.value(1).toFloat();
+        Db::construct[0][0][2] = query.value(2).toFloat();
+
+        Db::construct[0][1][0] = query.value(3).toFloat();
+        Db::construct[0][1][1] = query.value(4).toFloat();
+        Db::construct[0][1][2] = query.value(5).toFloat();
+
+        Db::construct[0][2][0] = query.value(6).toFloat();
+        Db::construct[0][2][1] = query.value(7).toFloat();
+        Db::construct[0][2][2] = query.value(8).toFloat();
+
+        Db::construct[0][3][0] = query.value(9).toFloat();
+        Db::construct[0][3][1] = query.value(10).toFloat();
+        Db::construct[0][3][2] = query.value(11).toFloat();*/
+
         index++;
+        //q += 12;
+    }
+    for(int i=0; i<(int)Db::construct.size(); i++){
+        for(int j=0; j<(int)Db::construct[i].size(); j++){
+            for(int k=0; k<(int)Db::construct[i][j].size(); k++){
+                cout<<i<<"/"<<j<<"/"<<k<<"/"<<Db::construct[i][j][k]<<endl;
+            }
+        }
     }
 }
 
@@ -134,10 +179,8 @@ void Db::addPartSQL(QString name){
 void Db::updateA(QString name, QString part, QString x, QString y, QString z){
     QSqlQuery query;
     if(query.exec("UPDATE poly SET ax="+x+", ay="+y+", az="+z+" WHERE name="+name+" AND part="+part+"")){
-        //notif = "Point A updated.";
         cout<<"updated A"<<endl;
     }else{
-        //notif = "Update A error;";
         qDebug()<<"update A error: "<<query.lastError()<<" / "<<query.lastQuery();
     }
 }
@@ -145,10 +188,8 @@ void Db::updateA(QString name, QString part, QString x, QString y, QString z){
 void Db::updateB(QString name, QString part,QString x, QString y, QString z){
     QSqlQuery query;
     if(query.exec("UPDATE poly SET bx="+x+", by="+y+", bz="+z+" WHERE name="+name+" AND part="+part+"")){
-        //notif = "Point B updated.";
         cout<<"updated B"<<endl;
     }else{
-        //notif = "Update B error.";
         qDebug()<<"update B error: "<<query.lastError()<<" / "<<query.lastQuery();
     }
 }
@@ -156,10 +197,8 @@ void Db::updateB(QString name, QString part,QString x, QString y, QString z){
 void Db::updateC(QString name, QString part,QString x, QString y, QString z){
     QSqlQuery query;
     if(query.exec("UPDATE poly SET cx="+x+", cy="+y+", cz="+z+" WHERE name="+name+" AND part="+part+"")){
-        //notif = "Point C updated.";
         cout<<"updated C"<<endl;
     }else{
-        //notif = "Update C error.";
         qDebug()<<"update C error: "<<query.lastError()<<" / "<<query.lastQuery();
     }
 }
@@ -167,16 +206,13 @@ void Db::updateC(QString name, QString part,QString x, QString y, QString z){
 void Db::updateD(QString name, QString part,QString x, QString y, QString z){
     QSqlQuery query;
     if(query.exec("UPDATE poly SET dx="+x+", dy="+y+", dz="+z+" WHERE name="+name+" AND part="+part+"")){
-        //notif = "point D updated.";
         cout<<"updated D"<<endl;
     }else{
-        //notif = "Update D error.";
         qDebug()<<"update D error: "<<query.lastError()<<" / "<<query.lastQuery();
     }
 }
 
 void Db::savePartSQL(QString name, QString part, vector<vector<vector<QString>>> construct){
-    //int i = part.toInt();
     updateA(name, part, construct[0][0][0], construct[0][0][1], construct[0][0][2]);
     updateB(name, part, construct[0][1][0], construct[0][1][1], construct[0][1][2]);
     updateC(name, part, construct[0][2][0], construct[0][2][1], construct[0][2][2]);

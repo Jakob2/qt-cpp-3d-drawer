@@ -31,25 +31,22 @@ public slots:
     void alterC();
     void alterD();
 
-    void newPart
-
-
-    ();
+    void newPart();
     void savePart();
     void deletePart();
 
 private:
     GlWidget view;
-    vector<float> north = {-0.5, 0.5};
+    /*vector<float> north = {-0.5, 0.5};
     vector<float> east = {-0.5, -0.5};
     vector<float> south = {0.5, -0.5};
-    vector<float> west = {0.5, 0.5};
+    vector<float> west = {0.5, 0.5};*/
 
     vector<int> rotation = {0,0,0};
 
     void initA(QString part);
     void initB(QString part);
-    void initC(QString name);
+    void initC(QString part);
     void initD(QString part);
 
     //vector<vector<QString>> convertThings();
