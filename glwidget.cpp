@@ -16,10 +16,13 @@ void GlWidget::initializeGL(){
     Db db;
 }
 
-void GlWidget::paintGL(float zoom, vector<int> rotation){
+void GlWidget::paintGL(float zoom, vector<int> rotation, QString current){
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+    glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+    glEnable( GL_BLEND );
     glScalef(zoom, zoom, zoom);
-    if(Db::construct.size()>1) complex(Db::construct, rotation);
+    int c = current.toInt();
+    if(Db::construct.size()>1) complex(Db::construct, rotation, c);
     four(Db::things, rotation);
 }
 
