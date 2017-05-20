@@ -18,20 +18,23 @@ public:
 
 public slots:
     void zoom();
-
-    void parts();
-    void choosePart();
-
     void rotateX();
     void rotateY();
     void rotateZ();
+    void hide();
+
+    void parts();
+    void choosePart();
 
     void alterA();
     void alterB();
     void alterC();
     void alterD();
 
-    void newPart();
+    void newPart
+
+
+    ();
     void savePart();
     void deletePart();
 
@@ -49,7 +52,7 @@ private:
     void initC(QString name);
     void initD(QString part);
 
-    vector<vector<QString>> convertThings();
+    //vector<vector<QString>> convertThings();
     vector<vector<vector<QString>>> convertConstruct(int index);
 };
 

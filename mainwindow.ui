@@ -457,6 +457,19 @@
      </rect>
     </property>
    </widget>
+   <widget class="QRadioButton" name="radioButton_hide">
+    <property name="geometry">
+     <rect>
+      <x>470</x>
+      <y>300</y>
+      <width>21</width>
+      <height>22</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>RadioButton</string>
+    </property>
+   </widget>
   </widget>
   <widget class="QMenuBar" name="menuBar">
    <property name="geometry">

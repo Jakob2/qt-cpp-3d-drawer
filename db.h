@@ -7,7 +7,7 @@
 #include <QObject>
 using namespace std;
 
-class Db : public Log
+class Db : protected Log
 {
 public:
     Db();

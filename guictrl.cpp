@@ -3,6 +3,8 @@
 using namespace std;
 
 int modPart;
+//int display;
+extern int display;
 
 GuiCtrl::GuiCtrl(){
     GlWidget view;
@@ -10,13 +12,13 @@ GuiCtrl::GuiCtrl(){
 
 void GuiCtrl::connectGUI(){
     QObject::connect(dial_zoom, SIGNAL(valueChanged(int)), this, SLOT(zoom()));
-
-    QObject::connect(comboBox_name, SIGNAL(currentIndexChanged(int)), this, SLOT(parts()));
-    QObject::connect(comboBox_part, SIGNAL(currentIndexChanged(int)), this, SLOT(choosePart()));
-
     QObject::connect(horizontalSlider_x, SIGNAL(valueChanged(int)), this, SLOT(rotateX()));
     QObject::connect(horizontalSlider_y, SIGNAL(valueChanged(int)), this, SLOT(rotateY()));
     QObject::connect(horizontalSlider_z, SIGNAL(valueChanged(int)), this, SLOT(rotateZ()));
+    QObject::connect(radioButton_hide, SIGNAL(toggled(bool)), this, SLOT(hide()));
+
+    QObject::connect(comboBox_name, SIGNAL(currentIndexChanged(int)), this, SLOT(parts()));
+    QObject::connect(comboBox_part, SIGNAL(currentIndexChanged(int)), this, SLOT(choosePart()));
 
     QObject::connect(doubleSpinBox_ax, SIGNAL(valueChanged(double)), this, SLOT(alterA()));
     QObject::connect(doubleSpinBox_ay, SIGNAL(valueChanged(double)), this, SLOT(alterA()));
@@ -75,14 +77,16 @@ void GuiCtrl::addNames(){
     for(int i=0; i<(int)Db::names.size(); i++){
         comboBox_name->addItem(QString::number(Db::names[i]));
     }
-    //selectConstruct(comboBox_name->currentText());
-    //textBrowser->append(notif);
+}
+
+void GuiCtrl::hide(){
+    display == 0 ? display = 1 : display = 0;
+    view.paintGL(1.0, rotation, comboBox_part->currentText());
 }
 
 void GuiCtrl::parts(){
     selectParts(comboBox_name->currentText());
     addParts();
-    //textBrowser->append(selPart);
 }
 
 void GuiCtrl::addParts(){
@@ -90,7 +94,6 @@ void GuiCtrl::addParts(){
     for(int i=0; i<(int)Db::parts.size(); i++){
         comboBox_part->addItem(QString::number(Db::parts[i]));
     }
-    //choosePart();
 }
 
 void GuiCtrl::choosePart(){
@@ -100,7 +103,6 @@ void GuiCtrl::choosePart(){
     initB(comboBox_part->currentText());
     initC(comboBox_part->currentText());
     initD(comboBox_part->currentText());
-    //if(comboBox_part->count()) selectThings(comboBox_name->currentText(), comboBox_part->currentText());
     view.paintGL(1.0, rotation, comboBox_part->currentText());
     textBrowser->append(selPart);
 }
@@ -110,7 +112,6 @@ void GuiCtrl::initA(QString part){
     doubleSpinBox_ax->setValue(Db::construct[n][0][0]);
     doubleSpinBox_ay->setValue(Db::construct[n][0][1]);
     doubleSpinBox_az->setValue(Db::construct[n][0][2]);
-    //textBrowser->append("point A initialized.");
 }
 
 void GuiCtrl::initB(QString part){
@@ -170,11 +171,13 @@ void GuiCtrl::newPart(){
 }
 
 void GuiCtrl::savePart(){
-    savePartSQL(comboBox_name->currentText(), comboBox_part->currentText(), convertConstruct(comboBox_part->currentText().toInt()));
+    QString name = comboBox_name->currentText();
+    QString part = comboBox_part->currentText();
+    savePartSQL(name, part, convertConstruct(part.toInt()));
     textBrowser->append(savPart);
 }
 
-vector<vector<QString>> GuiCtrl::convertThings(){
+/*vector<vector<QString>> GuiCtrl::convertThings(){
     vector<vector<QString>> res;
     res.resize(4*3);
     for(int i=0; i<(int)Db::things.size(); i++){
@@ -183,7 +186,7 @@ vector<vector<QString>> GuiCtrl::convertThings(){
         }
     }
     return res;
-}
+}*/
 
 vector<vector<vector<QString>>> GuiCtrl::convertConstruct(int index){
     vector<vector<vector<QString>>> res;

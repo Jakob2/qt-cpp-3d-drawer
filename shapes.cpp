@@ -4,6 +4,8 @@
 //#include <QGLWidget>
 using namespace std;
 
+int display;
+
 Shapes::Shapes(){
 
 }
@@ -52,15 +54,29 @@ void Shapes::complex(vector<vector<vector<float>>> &construct, vector<int> &rota
     for(int i=0; i<(int)construct.size(); i++){
         if(i==current) glColor4f(1,0,0,1);
         else glColor4f(1,0,0,0.3);
-        glBegin(GL_POLYGON);
-            glVertex3f(construct[i][0][0], construct[i][0][1], construct[i][0][2]);
-            if(i==current) glColor4f(0,1,0,1);
-            glVertex3f(construct[i][1][0], construct[i][1][1], construct[i][1][2]);
-            if(i==current) glColor4f(0,0,1,1);
-            glVertex3f(construct[i][2][0], construct[i][2][1], construct[i][2][2]);
-            if(i==current) glColor4f(1,1,0,1);
-            glVertex3f(construct[i][3][0], construct[i][3][1], construct[i][3][2]);
-        glEnd();
+        if(display){
+            glBegin(GL_POLYGON);
+                glVertex3f(construct[i][0][0], construct[i][0][1], construct[i][0][2]);
+                if(i==current) glColor4f(0,1,0,1);
+                glVertex3f(construct[i][1][0], construct[i][1][1], construct[i][1][2]);
+                if(i==current) glColor4f(0,0,1,1);
+                glVertex3f(construct[i][2][0], construct[i][2][1], construct[i][2][2]);
+                if(i==current) glColor4f(1,1,0,1);
+                glVertex3f(construct[i][3][0], construct[i][3][1], construct[i][3][2]);
+            glEnd();
+        }else{
+            if(i==current){
+                glBegin(GL_POLYGON);
+                    glVertex3f(construct[i][0][0], construct[i][0][1], construct[i][0][2]);
+                    glColor4f(0,1,0,1);
+                    glVertex3f(construct[i][1][0], construct[i][1][1], construct[i][1][2]);
+                    glColor4f(0,0,1,1);
+                    glVertex3f(construct[i][2][0], construct[i][2][1], construct[i][2][2]);
+                    glColor4f(1,1,0,1);
+                    glVertex3f(construct[i][3][0], construct[i][3][1], construct[i][3][2]);
+                glEnd();
+            }
+        }
     }
     glPopMatrix();
 }
