@@ -87,6 +87,9 @@ void GuiCtrl::hide(){
 }
 
 void GuiCtrl::parts(){
+    QObject::disconnect(comboBox_part, SIGNAL(currentIndexChanged(int)), this, SLOT(choosePart()));
+    comboBox_part->setCurrentIndex(0);
+    QObject::connect(comboBox_part, SIGNAL(currentIndexChanged(int)), this, SLOT(choosePart()));
     selectParts(comboBox_name->currentText());
     addParts();
 }
@@ -203,17 +206,6 @@ void GuiCtrl::savePart(){
     textBrowser->append(savPart);
 }
 
-/*vector<vector<QString>> GuiCtrl::convertThings(){
-    vector<vector<QString>> res;
-    res.resize(4*3);
-    for(int i=0; i<(int)Db::things.size(); i++){
-        for(int j=0; j<(int)Db::things[0].size(); j++){
-            res[i].push_back(QString::number(Db::things[i][j]));
-        }
-    }
-    return res;
-}*/
-
 vector<vector<vector<QString>>> GuiCtrl::convertConstruct(int index){
     vector<vector<vector<QString>>> res;
     for(int i=0; i<1; i++){
@@ -247,6 +239,7 @@ void GuiCtrl::newName(){
     addName();
     selectNames();
     addNames();
+    textBrowser->append(plusName);
     QObject::connect(comboBox_name, SIGNAL(currentIndexChanged(int)), this, SLOT(parts()));
     QObject::connect(comboBox_part, SIGNAL(currentIndexChanged(int)), this, SLOT(choosePart()));
 }
@@ -257,6 +250,7 @@ void GuiCtrl::delName(){
     removeName(comboBox_name->currentText());
     selectNames();
     addNames();
+    textBrowser->append(minusName);
     QObject::connect(comboBox_name, SIGNAL(currentIndexChanged(int)), this, SLOT(parts()));
     QObject::connect(comboBox_part, SIGNAL(currentIndexChanged(int)), this, SLOT(choosePart()));
 }

@@ -46,7 +46,7 @@ void Db::setConstruct(int size){
         for(int j=0; j<4; j++){
             Db::construct[i].push_back(vector<float>());
             for(int k=0; k<3; k++){
-             Db::construct[i][j].push_back(0);
+                Db::construct[i][j].push_back(0);
             }
         }
     }
@@ -227,12 +227,24 @@ void Db::addName(){
     z++;
     max = z;
     maxName = max.toString();
-    if(query.exec("INSERT INTO poly (name, part, ax,ay,az, bx,by,bz, cx,cy,cz,dx,dy,dz) VALUES ("+maxName+",0, 0,0,0, 0,0,0, 0,0,0, 0,0,0)")) cout<<"name added"<<endl;
-    else qDebug()<<"add name error: "<<query.lastError()<<" / "<<query.lastQuery();
+    if(query.exec("INSERT INTO poly (name, part, ax,ay,az, bx,by,bz, cx,cy,cz,dx,dy,dz) VALUES ("+maxName+",0, 0,0,0, 0,0,0, 0,0,0, 0,0,0)")){
+        plusName = "New name added.";
+        cout<<"name added"<<endl;
+    }
+    else{
+        plusName = "Add new name error.";
+        qDebug()<<"add name error: "<<query.lastError()<<" / "<<query.lastQuery();
+    }
 }
 
 void Db::removeName(QString name){
     QSqlQuery query;
-    if(query.exec("DELETE FROM poly WHERE name="+name+"")) cout<<"name deleted"<<endl;
-    else qDebug()<<"delete name error: "<<query.lastError()<<" / "<<query.lastQuery();
+    if(query.exec("DELETE FROM poly WHERE name="+name+"")){
+        minusName = "Name "+name+" deleted.";
+        cout<<"name deleted"<<endl;
+    }
+    else{
+        minusName = "Delete name error";
+        qDebug()<<"delete name error: "<<query.lastError()<<" / "<<query.lastQuery();
+    }
 }

@@ -39,10 +39,6 @@ public slots:
 
 private:
     GlWidget view;
-    /*vector<float> north = {-0.5, 0.5};
-    vector<float> east = {-0.5, -0.5};
-    vector<float> south = {0.5, -0.5};
-    vector<float> west = {0.5, 0.5};*/
 
     vector<int> rotation = {0,0,0};
 
@@ -51,7 +47,6 @@ private:
     void initC(QString part);
     void initD(QString part);
 
-    //vector<vector<QString>> convertThings();
     vector<vector<vector<QString>>> convertConstruct(int index);
 };
 
