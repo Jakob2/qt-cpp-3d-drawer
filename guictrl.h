@@ -5,6 +5,7 @@
 #include <QDialog>
 #include "ui_mainwindow.h"
 #include "db.h"
+#include "global.h"
 #include <QObject>
 
 class GuiCtrl : public QDialog, public Ui::MainWindow, public Db
@@ -21,6 +22,7 @@ public slots:
     void rotateX();
     void rotateY();
     void rotateZ();
+    void resetRotation();
     void hide();
 
     void parts();

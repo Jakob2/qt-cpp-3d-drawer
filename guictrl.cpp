@@ -2,8 +2,8 @@
 #include <iostream>
 using namespace std;
 
-int modPart;
-extern int display;
+//int modPart;
+//extern int display;
 
 GuiCtrl::GuiCtrl(){
     GlWidget view;
@@ -14,6 +14,7 @@ void GuiCtrl::connectGUI(){
     QObject::connect(horizontalSlider_x, SIGNAL(valueChanged(int)), this, SLOT(rotateX()));
     QObject::connect(horizontalSlider_y, SIGNAL(valueChanged(int)), this, SLOT(rotateY()));
     QObject::connect(horizontalSlider_z, SIGNAL(valueChanged(int)), this, SLOT(rotateZ()));
+    QObject::connect(pushButton_reset_rotation, SIGNAL(clicked(bool)), this, SLOT(resetRotation()));
     QObject::connect(radioButton_hide, SIGNAL(toggled(bool)), this, SLOT(hide()));
 
     QObject::connect(comboBox_name, SIGNAL(currentIndexChanged(int)), this, SLOT(parts()));
@@ -71,6 +72,13 @@ void GuiCtrl::rotateY(){
 
 void GuiCtrl::rotateZ(){
     rotation[2] = horizontalSlider_z->value();
+    view.paintGL(1.0, rotation, comboBox_part->currentText());
+}
+
+void GuiCtrl::resetRotation(){
+    horizontalSlider_x->setValue(0);
+    horizontalSlider_y->setValue(0);
+    horizontalSlider_z->setValue(0);
     view.paintGL(1.0, rotation, comboBox_part->currentText());
 }
 

@@ -2,6 +2,7 @@
 #define LOG_H
 
 #include "QString"
+#include "global.h"
 
 class Log
 {

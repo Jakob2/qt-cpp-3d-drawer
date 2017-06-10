@@ -3,6 +3,7 @@
 
 #include <QDoubleSpinBox>
 #include "guictrl.h"
+#include "global.h"
 
 class Style
 {

@@ -1,10 +1,15 @@
+#include "global.h"
 #include "mainwindow.h"
 #include <QApplication>
 #include "guictrl.h"
 #include "GL/freeglut.h"
 #include "style.h"
 
-extern int modPart;
+int modPart;
+int display;
+int LX = 1;
+int LY = 1;
+int LZ = 1;
 
 int main(int argc, char *argv[])
 {

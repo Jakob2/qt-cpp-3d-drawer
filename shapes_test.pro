@@ -27,7 +27,8 @@ HEADERS  += mainwindow.h \
     db.h \
     guictrl.h \
     style.h \
-    log.h
+    log.h \
+    global.h
 
 FORMS    += mainwindow.ui
 

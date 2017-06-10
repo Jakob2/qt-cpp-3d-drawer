@@ -496,6 +496,32 @@
      <string>-name</string>
     </property>
    </widget>
+   <widget class="QPushButton" name="pushButton_color">
+    <property name="geometry">
+     <rect>
+      <x>560</x>
+      <y>380</y>
+      <width>41</width>
+      <height>27</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>color</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="pushButton_reset_rotation">
+    <property name="geometry">
+     <rect>
+      <x>590</x>
+      <y>240</y>
+      <width>20</width>
+      <height>41</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>R</string>
+    </property>
+   </widget>
   </widget>
   <widget class="QMenuBar" name="menuBar">
    <property name="geometry">
@@ -522,7 +548,7 @@
   <customwidget>
    <class>GlWidget</class>
    <extends>QWidget</extends>
-   <header>glwidget.h</header>
+   <header location="global">glwidget.h</header>
    <container>1</container>
   </customwidget>
  </customwidgets>

@@ -4,7 +4,7 @@
 //#include <QGLWidget>
 using namespace std;
 
-int display;
+//int display;
 
 Shapes::Shapes(){
 

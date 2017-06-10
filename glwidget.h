@@ -3,6 +3,7 @@
 
 #include <QGLWidget>
 #include <QTimer>
+#include "global.h"
 #include "shapes.h"
 #include "db.h"
 
