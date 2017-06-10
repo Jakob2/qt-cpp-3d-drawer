@@ -44,7 +44,6 @@ public slots:
     void delName();
 
     void colorDialog();
-    //void saveColor();
 
 private:
     GlWidget view;

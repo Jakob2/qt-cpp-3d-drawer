@@ -16,6 +16,7 @@ void GuiCtrl::connectGUI(){
     QObject::connect(horizontalSlider_z, SIGNAL(valueChanged(int)), this, SLOT(rotateZ()));
     QObject::connect(pushButton_reset_rotation, SIGNAL(clicked(bool)), this, SLOT(resetRotation()));
     QObject::connect(radioButton_hide, SIGNAL(toggled(bool)), this, SLOT(hide()));
+    QObject::connect(radioButton_realcolor, SIGNAL(toggled(bool)), this, SLOT(real()));
 
     QObject::connect(comboBox_name, SIGNAL(currentIndexChanged(int)), this, SLOT(parts()));
     QObject::connect(comboBox_part, SIGNAL(currentIndexChanged(int)), this, SLOT(choosePart()));
@@ -223,14 +224,11 @@ void GuiCtrl::savePart(){
     textBrowser->append(savPart);
     if(cdl != NULL){
         res = cdl->selectedColor();
-        /*color[0] = res.redF();
-        color[1] = res.greenF();
-        color[2] = res.blueF();*/
         r = QString::number(res.redF());
         g = QString::number(res.greenF());
         b = QString::number(res.blueF());
-        //cout<<color[0]<<endl;
         saveColor(name, part, r, g, b);
+        textBrowser->append(savColor);
     }
 }
 
@@ -282,10 +280,6 @@ void GuiCtrl::delName(){
     QObject::connect(comboBox_name, SIGNAL(currentIndexChanged(int)), this, SLOT(parts()));
     QObject::connect(comboBox_part, SIGNAL(currentIndexChanged(int)), this, SLOT(choosePart()));
 }
-
-/*void GuiCtrl::saveColor(){
-
-}*/
 
 void GuiCtrl::colorDialog(){
     if(cdl != NULL){

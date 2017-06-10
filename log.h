@@ -17,6 +17,7 @@ protected:
     QString resPart;
     QString plusName;
     QString minusName;
+    QString savColor;
 };
 
 #endif // LOG_H

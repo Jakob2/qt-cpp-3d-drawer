@@ -39,6 +39,7 @@ void Shapes::complex(vector<vector<vector<float>>> &construct, vector<int> &rota
         if(i==current) glColor4f(1,0,0,1);
         //else glColor4f(1,0,0,0.3);
         else glColor4f(r,g,b,0.3);
+        if(!REAL){
         if(!display){
             glBegin(GL_POLYGON);
                 glVertex3f(construct[i][0][0], construct[i][0][1], construct[i][0][2]);
@@ -61,6 +62,15 @@ void Shapes::complex(vector<vector<vector<float>>> &construct, vector<int> &rota
                     glVertex3f(construct[i][3][0], construct[i][3][1], construct[i][3][2]);
                 glEnd();
             }
+        }
+        }else if(REAL){
+            glBegin(GL_POLYGON);
+            glColor4f(r,g,b,1);
+                glVertex3f(construct[i][0][0], construct[i][0][1], construct[i][0][2]);
+                glVertex3f(construct[i][1][0], construct[i][1][1], construct[i][1][2]);
+                glVertex3f(construct[i][2][0], construct[i][2][1], construct[i][2][2]);
+                glVertex3f(construct[i][3][0], construct[i][3][1], construct[i][3][2]);
+            glEnd();
         }
     }
     glPopMatrix();
