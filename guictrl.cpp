@@ -229,6 +229,7 @@ void GuiCtrl::savePart(){
         b = QString::number(res.blueF());
         saveColor(name, part, r, g, b);
         textBrowser->append(savColor);
+        selectConstruct(comboBox_name->currentText());
     }
 }
 
