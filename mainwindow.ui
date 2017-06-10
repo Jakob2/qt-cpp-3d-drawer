@@ -460,7 +460,7 @@
    <widget class="QRadioButton" name="radioButton_hide">
     <property name="geometry">
      <rect>
-      <x>470</x>
+      <x>460</x>
       <y>300</y>
       <width>21</width>
       <height>22</height>
@@ -499,7 +499,7 @@
    <widget class="QPushButton" name="pushButton_color">
     <property name="geometry">
      <rect>
-      <x>560</x>
+      <x>510</x>
       <y>380</y>
       <width>41</width>
       <height>27</height>
@@ -520,6 +520,32 @@
     </property>
     <property name="text">
      <string>R</string>
+    </property>
+   </widget>
+   <widget class="QLabel" name="label_5">
+    <property name="geometry">
+     <rect>
+      <x>420</x>
+      <y>340</y>
+      <width>41</width>
+      <height>16</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>part:</string>
+    </property>
+   </widget>
+   <widget class="QRadioButton" name="radioButton_realcolor">
+    <property name="geometry">
+     <rect>
+      <x>480</x>
+      <y>300</y>
+      <width>21</width>
+      <height>22</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>RadioButton</string>
     </property>
    </widget>
   </widget>

@@ -25,6 +25,7 @@ void Shapes::axes(){
 }
 
 void Shapes::complex(vector<vector<vector<float>>> &construct, vector<int> &rotation, int current){
+    float r, g, b;
     glMatrixMode(GL_MODELVIEW);
     glPushMatrix();
     glRotatef(rotation[0], 1,0,0);
@@ -32,8 +33,12 @@ void Shapes::complex(vector<vector<vector<float>>> &construct, vector<int> &rota
     glRotatef(rotation[2], 0,0,1);
     axes();
     for(int i=0; i<(int)construct.size(); i++){
+        r = construct[i][4][0];
+        g = construct[i][4][1];
+        b = construct[i][4][2];
         if(i==current) glColor4f(1,0,0,1);
-        else glColor4f(1,0,0,0.3);
+        //else glColor4f(1,0,0,0.3);
+        else glColor4f(r,g,b,0.3);
         if(!display){
             glBegin(GL_POLYGON);
                 glVertex3f(construct[i][0][0], construct[i][0][1], construct[i][0][2]);

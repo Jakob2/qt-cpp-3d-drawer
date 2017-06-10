@@ -7,9 +7,10 @@
 
 int modPart;
 int display;
-int LX = 1;
+int REAL;
+/*int LX = 1;
 int LY = 1;
-int LZ = 1;
+int LZ = 1;*/
 
 int main(int argc, char *argv[])
 {

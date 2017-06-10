@@ -7,6 +7,9 @@
 #include "db.h"
 #include "global.h"
 #include <QObject>
+#include <QColorDialog>
+#include <QColor>
+#include <QDebug>
 
 class GuiCtrl : public QDialog, public Ui::MainWindow, public Db
 {
@@ -24,6 +27,7 @@ public slots:
     void rotateZ();
     void resetRotation();
     void hide();
+    void real();
 
     void parts();
     void choosePart();
@@ -39,8 +43,13 @@ public slots:
     void newName();
     void delName();
 
+    void colorDialog();
+    //void saveColor();
+
 private:
     GlWidget view;
+    QColorDialog *cdl = NULL;
+    vector<float> color = {0,0,0};
 
     vector<int> rotation = {0,0,0};
 

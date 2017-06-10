@@ -29,6 +29,7 @@ public:
     void resetPartsSQL(QString name);
     void addName();
     void removeName(QString name);
+    void saveColor(QString name, QString part, QString r, QString g, QString b);
 
 private:
     void updateA(QString name, QString part, QString x, QString y, QString z);
@@ -37,7 +38,7 @@ private:
     void updateD(QString name, QString part, QString x, QString y, QString z);
 
     void setConstruct(int size);
-    void setThings();
+    //void setThings();
 
 };
 

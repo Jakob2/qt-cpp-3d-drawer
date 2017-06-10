@@ -18,7 +18,7 @@ vector<int> Db::parts;
 Db::Db(){
     connectSQL();
     selectNames();
-    setThings();
+    //setThings();
     setConstruct(1);
 }
 
@@ -43,7 +43,7 @@ void Db::setConstruct(int size){
     Db::construct.clear();
     for(int i=0; i<size; i++){
         Db::construct.push_back(vector<vector<float>>());
-        for(int j=0; j<4; j++){
+        for(int j=0; j<5; j++){
             Db::construct[i].push_back(vector<float>());
             for(int k=0; k<3; k++){
                 Db::construct[i][j].push_back(0);
@@ -52,7 +52,7 @@ void Db::setConstruct(int size){
     }
 }
 
-void Db::setThings(){
+/*void Db::setThings(){
     Db::things.clear();
     for(int i=0; i<4; i++){
         Db::things.push_back(vector<float>());
@@ -60,7 +60,7 @@ void Db::setThings(){
             Db::things[i].push_back(0);
         }
     }
-}
+}*/
 
 void Db::selectConstruct(QString name){
     int range;
@@ -71,7 +71,7 @@ void Db::selectConstruct(QString name){
     while(query.next()) range = query.value(0).toInt();
     setConstruct(range);
     int index = 0;
-    if(query.exec("SELECT ax,ay,az, bx,by,bz, cx,cy,cz, dx,dy,dz FROM poly WHERE name="+name+"")) cout<<"construct selected"<<endl;
+    if(query.exec("SELECT ax,ay,az, bx,by,bz, cx,cy,cz, dx,dy,dz, r,g,b FROM poly WHERE name="+name+"")) cout<<"construct selected"<<endl;
     else qDebug()<<"construct error: "<<query.lastError()<<" / "<<query.lastQuery();
     while(query.next()){
         Db::construct[index][0][0] = query.value(0).toFloat();
@@ -89,6 +89,11 @@ void Db::selectConstruct(QString name){
         Db::construct[index][3][0] = query.value(9).toFloat();
         Db::construct[index][3][1] = query.value(10).toFloat();
         Db::construct[index][3][2] = query.value(11).toFloat();
+
+        Db::construct[index][4][0] = query.value(12).toFloat();
+        Db::construct[index][4][1] = query.value(13).toFloat();
+        Db::construct[index][4][2] = query.value(14).toFloat();
+
 
         index++;
     }
@@ -247,4 +252,10 @@ void Db::removeName(QString name){
         minusName = "Delete name error";
         qDebug()<<"delete name error: "<<query.lastError()<<" / "<<query.lastQuery();
     }
+}
+
+void Db::saveColor(QString name, QString part, QString r, QString g, QString b){
+    QSqlQuery query;
+    if(query.exec("UPDATE poly SET r ="+r+", g ="+g+", b ="+b+" WHERE name="+name+" AND part ="+part+"")) cout<<"color updated"<<endl;
+    else qDebug()<<"update color error"<<query.lastError()<<" / "<<query.lastQuery();
 }

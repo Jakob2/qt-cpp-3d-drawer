@@ -31,5 +31,5 @@ void GlWidget::resizeGL(int w, int h){
     glMatrixMode(GL_PROJECTION);
     glLoadIdentity();
     gluPerspective(60.0, (float)w/(float)h, 0.01, 100.0);
-    gluLookAt(LX,LY,LZ, 0,0,0, 0,1,0);
+    gluLookAt(1,1,1, 0,0,0, 0,1,0);
 }

@@ -41,6 +41,8 @@ void GuiCtrl::connectGUI(){
     QObject::connect(pushButton_del, SIGNAL(pressed()), this, SLOT(deletePart()));
     QObject::connect(pushButton_name, SIGNAL(pressed()), this, SLOT(newName()));
     QObject::connect(pushButton_delName, SIGNAL(pressed()), this, SLOT(delName()));
+
+    QObject::connect(pushButton_color, SIGNAL(pressed()), this, SLOT(colorDialog()));
 }
 
 void GuiCtrl::zoom(){
@@ -91,6 +93,11 @@ void GuiCtrl::addNames(){
 
 void GuiCtrl::hide(){
     display == 0 ? display = 1 : display = 0;
+    view.paintGL(1.0, rotation, comboBox_part->currentText());
+}
+
+void GuiCtrl::real(){
+    REAL == 0 ? REAL = 1 : REAL = 0;
     view.paintGL(1.0, rotation, comboBox_part->currentText());
 }
 
@@ -208,17 +215,30 @@ void GuiCtrl::newPart(){
 }
 
 void GuiCtrl::savePart(){
+    QColor res;
+    QString r, g, b;
     QString name = comboBox_name->currentText();
     QString part = comboBox_part->currentText();
     savePartSQL(name, part, convertConstruct(part.toInt()));
     textBrowser->append(savPart);
+    if(cdl != NULL){
+        res = cdl->selectedColor();
+        /*color[0] = res.redF();
+        color[1] = res.greenF();
+        color[2] = res.blueF();*/
+        r = QString::number(res.redF());
+        g = QString::number(res.greenF());
+        b = QString::number(res.blueF());
+        //cout<<color[0]<<endl;
+        saveColor(name, part, r, g, b);
+    }
 }
 
 vector<vector<vector<QString>>> GuiCtrl::convertConstruct(int index){
     vector<vector<vector<QString>>> res;
     for(int i=0; i<1; i++){
         res.push_back(vector<vector<QString>>());
-        for(int j=0; j<4; j++){
+        for(int j=0; j<5; j++){
             res[i].push_back(vector<QString>());
         }
     }
@@ -261,4 +281,18 @@ void GuiCtrl::delName(){
     textBrowser->append(minusName);
     QObject::connect(comboBox_name, SIGNAL(currentIndexChanged(int)), this, SLOT(parts()));
     QObject::connect(comboBox_part, SIGNAL(currentIndexChanged(int)), this, SLOT(choosePart()));
+}
+
+/*void GuiCtrl::saveColor(){
+
+}*/
+
+void GuiCtrl::colorDialog(){
+    if(cdl != NULL){
+        delete(cdl);
+        cdl = NULL;
+    }
+    cdl = new QColorDialog();
+    cdl->show();
+
 }
