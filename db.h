@@ -32,6 +32,8 @@ public:
     void saveColor(QString name, QString part, QString r, QString g, QString b);
 
 private:
+    QString db = "3dg";
+    QString table = "poly";
     void updateA(QString name, QString part, QString x, QString y, QString z);
     void updateB(QString name, QString part, QString x, QString y, QString z);
     void updateC(QString name, QString part, QString x, QString y, QString z);

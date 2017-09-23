@@ -24,7 +24,7 @@ Db::Db(){
 
 void Db::connectSQL(){
     QSqlDatabase m_db = QSqlDatabase::addDatabase("QSQLITE");
-    m_db.setDatabaseName("/home/ok/jakob/QT4/DATABASES/3dg");
+    m_db.setDatabaseName("/home/ok/jakob/QT4/DATABASES/"+db);
     if(!m_db.open()) cout<< "Error: connection with database fail"<<endl;
     else cout<< "Database: connection ok"<<endl;
 }
@@ -32,7 +32,7 @@ void Db::connectSQL(){
 void Db::selectNames(){
     Db::names.clear();
     QSqlQuery query;
-    if(query.exec("SELECT DISTINCT name FROM poly")) cout<<"names selected"<<endl;
+    if(query.exec("SELECT DISTINCT name FROM "+table)) cout<<"names selected"<<endl;
     else qDebug()<<"insert error: "<<query.lastError()<<" / "<<query.lastQuery();
     while(query.next()){
         Db::names.push_back(query.value(0).toInt());
@@ -66,12 +66,12 @@ void Db::selectConstruct(QString name){
     int range;
     Db::construct.clear();
     QSqlQuery query;
-    if(query.exec("SELECT COUNT(*) FROM poly WHERE name="+name+"")) cout<<"construct range selected"<<endl;
+    if(query.exec("SELECT COUNT(*) FROM "+table+" WHERE name="+name+"")) cout<<"construct range selected"<<endl;
     else qDebug()<<"construct range error: "<<query.lastError()<<" / "<<query.lastQuery();
     while(query.next()) range = query.value(0).toInt();
     setConstruct(range);
     int index = 0;
-    if(query.exec("SELECT ax,ay,az, bx,by,bz, cx,cy,cz, dx,dy,dz, r,g,b FROM poly WHERE name="+name+"")) cout<<"construct selected"<<endl;
+    if(query.exec("SELECT ax,ay,az, bx,by,bz, cx,cy,cz, dx,dy,dz, r,g,b FROM "+table+" WHERE name="+name+"")) cout<<"construct selected"<<endl;
     else qDebug()<<"construct error: "<<query.lastError()<<" / "<<query.lastQuery();
     while(query.next()){
         Db::construct[index][0][0] = query.value(0).toFloat();
@@ -109,7 +109,7 @@ void Db::selectConstruct(QString name){
 void Db::selectParts(QString name){
     Db::parts.clear();
     QSqlQuery query;
-    if(query.exec("SELECT part FROM poly WHERE name ='"+name+"'")){
+    if(query.exec("SELECT part FROM "+table+" WHERE name ='"+name+"'")){
         selPart = "New part selected. Unsaved changes are lost.";
         cout<<"parts selected"<<endl;
     }else{
@@ -126,7 +126,7 @@ void Db::addPartSQL(QString name){
     QVariant tmp;
     QString newPart;
     QSqlQuery query;
-    if(query.exec("SELECT MAX(part) FROM poly WHERE name="+name+"")) cout<<"max part selected"<<endl;
+    if(query.exec("SELECT MAX(part) FROM "+table+" WHERE name="+name+"")) cout<<"max part selected"<<endl;
     else qDebug()<<"max part error: "<<query.lastError()<<" / "<<query.lastQuery();
     while(query.next()){
         maxPart = query.value(0).toInt();
@@ -134,7 +134,7 @@ void Db::addPartSQL(QString name){
     maxPart += 1;
     tmp = maxPart;
     newPart = tmp.toString();
-    if(query.exec("INSERT INTO poly(name, part, ax,ay,az, bx,by,bz, cx,cy,cz, dx,dy,dz) VALUES ('"+name+"', '"+newPart+"', '0','0','0', '0','0','0', '0','0','0', '0','0','0')")){
+    if(query.exec("INSERT INTO "+table+"(name, part, ax,ay,az, bx,by,bz, cx,cy,cz, dx,dy,dz) VALUES ('"+name+"', '"+newPart+"', '0','0','0', '0','0','0', '0','0','0', '0','0','0')")){
         addPart = "New part created.";
         cout<<"new part inserted"<<endl;
     }else{
@@ -145,7 +145,7 @@ void Db::addPartSQL(QString name){
 
 void Db::updateA(QString name, QString part, QString x, QString y, QString z){
     QSqlQuery query;
-    if(query.exec("UPDATE poly SET ax="+x+", ay="+y+", az="+z+" WHERE name="+name+" AND part="+part+"")){
+    if(query.exec("UPDATE "+table+" SET ax="+x+", ay="+y+", az="+z+" WHERE name="+name+" AND part="+part+"")){
         cout<<"updated A"<<endl;
     }else{
         qDebug()<<"update A error: "<<query.lastError()<<" / "<<query.lastQuery();
@@ -154,7 +154,7 @@ void Db::updateA(QString name, QString part, QString x, QString y, QString z){
 
 void Db::updateB(QString name, QString part,QString x, QString y, QString z){
     QSqlQuery query;
-    if(query.exec("UPDATE poly SET bx="+x+", by="+y+", bz="+z+" WHERE name="+name+" AND part="+part+"")){
+    if(query.exec("UPDATE "+table+" SET bx="+x+", by="+y+", bz="+z+" WHERE name="+name+" AND part="+part+"")){
         cout<<"updated B"<<endl;
     }else{
         qDebug()<<"update B error: "<<query.lastError()<<" / "<<query.lastQuery();
@@ -163,7 +163,7 @@ void Db::updateB(QString name, QString part,QString x, QString y, QString z){
 
 void Db::updateC(QString name, QString part,QString x, QString y, QString z){
     QSqlQuery query;
-    if(query.exec("UPDATE poly SET cx="+x+", cy="+y+", cz="+z+" WHERE name="+name+" AND part="+part+"")){
+    if(query.exec("UPDATE "+table+" SET cx="+x+", cy="+y+", cz="+z+" WHERE name="+name+" AND part="+part+"")){
         cout<<"updated C"<<endl;
     }else{
         qDebug()<<"update C error: "<<query.lastError()<<" / "<<query.lastQuery();
@@ -172,7 +172,7 @@ void Db::updateC(QString name, QString part,QString x, QString y, QString z){
 
 void Db::updateD(QString name, QString part,QString x, QString y, QString z){
     QSqlQuery query;
-    if(query.exec("UPDATE poly SET dx="+x+", dy="+y+", dz="+z+" WHERE name="+name+" AND part="+part+"")){
+    if(query.exec("UPDATE "+table+" SET dx="+x+", dy="+y+", dz="+z+" WHERE name="+name+" AND part="+part+"")){
         cout<<"updated D"<<endl;
     }else{
         qDebug()<<"update D error: "<<query.lastError()<<" / "<<query.lastQuery();
@@ -189,7 +189,7 @@ void Db::savePartSQL(QString name, QString part, vector<vector<vector<QString>>>
 
 void Db::deletePartSQL(QString name, QString part){
     QSqlQuery query;
-    if(query.exec("DELETE FROM poly WHERE name="+name+" AND part="+part+"")){
+    if(query.exec("DELETE FROM "+table+" WHERE name="+name+" AND part="+part+"")){
         delPart = "Part "+part+" deleted.";
         cout<<"deleted part"<<endl;
     }else{
@@ -201,7 +201,7 @@ void Db::deletePartSQL(QString name, QString part){
 void Db::resetPartsSQL(QString name){
     vector<QString> oldIndex;
     QSqlQuery query;
-    if(query.exec("SELECT part FROM poly WHERE name="+name+"")) cout<<"reset parts selected"<<endl;
+    if(query.exec("SELECT part FROM "+table+" WHERE name="+name+"")) cout<<"reset parts selected"<<endl;
     else qDebug()<<"reset parts select error: "<<query.lastError()<<" / "<<query.lastQuery();
     while(query.next()){
         oldIndex.push_back(query.value(0).toString());
@@ -209,7 +209,7 @@ void Db::resetPartsSQL(QString name){
     QString ni;
     for(int i=0; i<(int)oldIndex.size(); i++){
         ni = QString::number(i);
-        if(query.exec("UPDATE poly SET part="+ni+" WHERE name="+name+" AND part="+oldIndex[i]+"")){
+        if(query.exec("UPDATE "+table+" SET part="+ni+" WHERE name="+name+" AND part="+oldIndex[i]+"")){
             resPart = "Part indexes resetted.";
             cout<<"new "<<i<<" index updated"<<endl;
         }else{
@@ -223,7 +223,7 @@ void Db::addName(){
     QVariant max;
     QString maxName;
     QSqlQuery query;
-    if(query.exec("SELECT MAX(name) FROM poly")) cout<<"names selected"<<endl;
+    if(query.exec("SELECT MAX(name) FROM "+table)) cout<<"names selected"<<endl;
     else qDebug()<<"select names error: "<<query.lastError()<<" / "<<query.lastQuery();
     while(query.next()){
         max = query.value(0).toInt();
@@ -232,7 +232,7 @@ void Db::addName(){
     z++;
     max = z;
     maxName = max.toString();
-    if(query.exec("INSERT INTO poly (name, part, ax,ay,az, bx,by,bz, cx,cy,cz,dx,dy,dz) VALUES ("+maxName+",0, 0,0,0, 0,0,0, 0,0,0, 0,0,0)")){
+    if(query.exec("INSERT INTO "+table+" (name, part, ax,ay,az, bx,by,bz, cx,cy,cz,dx,dy,dz) VALUES ("+maxName+",0, 0,0,0, 0,0,0, 0,0,0, 0,0,0)")){
         plusName = "New name added.";
         cout<<"name added"<<endl;
     }
@@ -244,7 +244,7 @@ void Db::addName(){
 
 void Db::removeName(QString name){
     QSqlQuery query;
-    if(query.exec("DELETE FROM poly WHERE name="+name+"")){
+    if(query.exec("DELETE FROM "+table+" WHERE name="+name+"")){
         minusName = "Name "+name+" deleted.";
         cout<<"name deleted"<<endl;
     }
@@ -256,7 +256,7 @@ void Db::removeName(QString name){
 
 void Db::saveColor(QString name, QString part, QString r, QString g, QString b){
     QSqlQuery query;
-    if(query.exec("UPDATE poly SET r ="+r+", g ="+g+", b ="+b+" WHERE name="+name+" AND part ="+part+"")){
+    if(query.exec("UPDATE "+table+" SET r ="+r+", g ="+g+", b ="+b+" WHERE name="+name+" AND part ="+part+"")){
         savColor = "Color updated for part "+part+".";
         cout<<"color updated"<<endl;
     }

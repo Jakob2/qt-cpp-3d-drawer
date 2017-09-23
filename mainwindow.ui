@@ -579,6 +579,9 @@
       <height>27</height>
      </rect>
     </property>
+    <property name="decimals">
+     <number>3</number>
+    </property>
     <property name="minimum">
      <double>-99.000000000000000</double>
     </property>
@@ -592,6 +595,9 @@
       <height>27</height>
      </rect>
     </property>
+    <property name="decimals">
+     <number>3</number>
+    </property>
     <property name="minimum">
      <double>-99.000000000000000</double>
     </property>
@@ -604,6 +610,9 @@
       <width>69</width>
       <height>27</height>
      </rect>
+    </property>
+    <property name="decimals">
+     <number>3</number>
     </property>
     <property name="minimum">
      <double>-99.000000000000000</double>
