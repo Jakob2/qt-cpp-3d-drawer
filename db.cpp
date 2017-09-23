@@ -257,11 +257,11 @@ void Db::removeName(QString name){
 void Db::saveColor(QString name, QString part, QString r, QString g, QString b){
     QSqlQuery query;
     if(query.exec("UPDATE poly SET r ="+r+", g ="+g+", b ="+b+" WHERE name="+name+" AND part ="+part+"")){
-        savColor = "Color updated for "+part;
+        savColor = "Color updated for part "+part+".";
         cout<<"color updated"<<endl;
     }
     else{
-        savColor = "Update color error";
+        savColor = "Update color error.";
         qDebug()<<"update color error"<<query.lastError()<<" / "<<query.lastQuery();
     }
 }

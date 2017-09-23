@@ -2,9 +2,6 @@
 #include <iostream>
 using namespace std;
 
-//int modPart;
-//extern int display;
-
 GuiCtrl::GuiCtrl(){
     GlWidget view;
 }
@@ -49,15 +46,15 @@ void GuiCtrl::connectGUI(){
 void GuiCtrl::zoom(){
     switch(dial_zoom->value()){
     case 0:
-        view.resizeGL(391,361);
+        view.resizeGL(WIDTH,HEIGHT);
         view.paintGL(0.25, rotation, comboBox_part->currentText());
         break;
     case 1:
-        view.resizeGL(391,361);
+        view.resizeGL(WIDTH,HEIGHT);
         view.paintGL(0.5, rotation, comboBox_part->currentText());
         break;
     case 2:
-        view.resizeGL(391,361);
+        view.resizeGL(WIDTH,HEIGHT);
         view.paintGL(1.0, rotation, comboBox_part->currentText());
         break;
     }
@@ -289,5 +286,4 @@ void GuiCtrl::colorDialog(){
     }
     cdl = new QColorDialog();
     cdl->show();
-
 }
