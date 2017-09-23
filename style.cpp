@@ -36,6 +36,18 @@ void Style::z(GuiCtrl &gui){
     gui.label_z->setStyleSheet("QLabel { color: blue }");
 }
 
+void Style::nX(GuiCtrl &gui){
+    gui.doubleSpinBox_normalX->setStyleSheet("QDoubleSpinBox { background-color: red }");
+}
+
+void Style::nY(GuiCtrl &gui){
+    gui.doubleSpinBox_normalY->setStyleSheet("QDoubleSpinBox { background-color: green }");
+}
+
+void Style::nZ(GuiCtrl &gui){
+    gui.doubleSpinBox_normalZ->setStyleSheet("QDoubleSpinBox { background-color: blue }");
+}
+
 void Style::colorize(GuiCtrl &gui){
     a(gui);
     b(gui);
@@ -44,4 +56,7 @@ void Style::colorize(GuiCtrl &gui){
     x(gui);
     y(gui);
     z(gui);
+    nX(gui);
+    nY(gui);
+    nZ(gui);
 }
