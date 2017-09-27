@@ -447,7 +447,7 @@
      </rect>
     </property>
     <property name="text">
-     <string>&amp;del</string>
+     <string>del</string>
     </property>
    </widget>
    <widget class="QTextBrowser" name="textBrowser">
@@ -570,52 +570,107 @@
      <string>normal:</string>
     </property>
    </widget>
-   <widget class="QDoubleSpinBox" name="doubleSpinBox_normalX">
+   <widget class="QComboBox" name="comboBox_nL">
     <property name="geometry">
      <rect>
       <x>410</x>
       <y>400</y>
-      <width>69</width>
+      <width>41</width>
       <height>27</height>
      </rect>
     </property>
-    <property name="decimals">
-     <number>3</number>
-    </property>
-    <property name="minimum">
-     <double>-99.000000000000000</double>
-    </property>
+    <item>
+     <property name="text">
+      <string>A</string>
+     </property>
+    </item>
+    <item>
+     <property name="text">
+      <string>B</string>
+     </property>
+    </item>
+    <item>
+     <property name="text">
+      <string>C</string>
+     </property>
+    </item>
+    <item>
+     <property name="text">
+      <string>D</string>
+     </property>
+    </item>
    </widget>
-   <widget class="QDoubleSpinBox" name="doubleSpinBox_normalY">
+   <widget class="QComboBox" name="comboBox_nM">
     <property name="geometry">
      <rect>
-      <x>480</x>
+      <x>460</x>
       <y>400</y>
-      <width>69</width>
+      <width>41</width>
       <height>27</height>
      </rect>
     </property>
-    <property name="decimals">
-     <number>3</number>
-    </property>
-    <property name="minimum">
-     <double>-99.000000000000000</double>
-    </property>
+    <item>
+     <property name="text">
+      <string>A</string>
+     </property>
+    </item>
+    <item>
+     <property name="text">
+      <string>B</string>
+     </property>
+    </item>
+    <item>
+     <property name="text">
+      <string>C</string>
+     </property>
+    </item>
+    <item>
+     <property name="text">
+      <string>D</string>
+     </property>
+    </item>
    </widget>
-   <widget class="QDoubleSpinBox" name="doubleSpinBox_normalZ">
+   <widget class="QComboBox" name="comboBox_nR">
     <property name="geometry">
      <rect>
-      <x>550</x>
+      <x>510</x>
       <y>400</y>
-      <width>69</width>
+      <width>41</width>
       <height>27</height>
      </rect>
     </property>
-    <property name="decimals">
-     <number>3</number>
+    <item>
+     <property name="text">
+      <string>A</string>
+     </property>
+    </item>
+    <item>
+     <property name="text">
+      <string>B</string>
+     </property>
+    </item>
+    <item>
+     <property name="text">
+      <string>C</string>
+     </property>
+    </item>
+    <item>
+     <property name="text">
+      <string>D</string>
+     </property>
+    </item>
+   </widget>
+   <widget class="QPushButton" name="pushButton_normal">
+    <property name="geometry">
+     <rect>
+      <x>560</x>
+      <y>400</y>
+      <width>51</width>
+      <height>27</height>
+     </rect>
     </property>
-    <property name="minimum">
-     <double>-99.000000000000000</double>
+    <property name="text">
+     <string>calc</string>
     </property>
    </widget>
   </widget>

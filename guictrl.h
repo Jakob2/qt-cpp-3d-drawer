@@ -10,6 +10,7 @@
 #include <QColorDialog>
 #include <QColor>
 #include <QDebug>
+#include "vector.h"
 
 class GuiCtrl : public QDialog, public Ui::MainWindow, public Db
 {
@@ -19,6 +20,9 @@ public:
     void connectGUI();
     void addNames();
     void addParts();
+
+    //std::vector<float> test = {1,1,1};
+    //std::vector<float> testo = {1,1,1};
 
 public slots:
     void zoom();
@@ -44,6 +48,8 @@ public slots:
     void delName();
 
     void colorDialog();
+
+    void setNormal();
 
 private:
     GlWidget view;

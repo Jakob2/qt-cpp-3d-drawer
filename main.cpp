@@ -10,6 +10,7 @@ int display;
 int REAL;
 int WIDTH = 391;
 int HEIGHT = 361;
+std::vector<int> NORMAL;
 /*int LX = 1;
 int LY = 1;
 int LZ = 1;*/

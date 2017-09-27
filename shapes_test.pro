@@ -19,7 +19,8 @@ SOURCES += main.cpp\
     db.cpp \
     guictrl.cpp \
     style.cpp \
-    log.cpp
+    log.cpp \
+    vector.cpp
 
 HEADERS  += mainwindow.h \
     glwidget.h \
@@ -28,7 +29,8 @@ HEADERS  += mainwindow.h \
     guictrl.h \
     style.h \
     log.h \
-    global.h
+    global.h \
+    vector.h
 
 FORMS    += mainwindow.ui
 

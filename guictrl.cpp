@@ -41,6 +41,8 @@ void GuiCtrl::connectGUI(){
     QObject::connect(pushButton_delName, SIGNAL(pressed()), this, SLOT(delName()));
 
     QObject::connect(pushButton_color, SIGNAL(pressed()), this, SLOT(colorDialog()));
+
+    QObject::connect(pushButton_normal, SIGNAL(pressed()), this, SLOT(setNormal()));
 }
 
 void GuiCtrl::zoom(){
@@ -286,4 +288,93 @@ void GuiCtrl::colorDialog(){
     }
     cdl = new QColorDialog();
     cdl->show();
+}
+
+void GuiCtrl::setNormal(){
+    int l,m,r;
+    l = comboBox_nL->currentIndex();
+    m = comboBox_nM->currentIndex();
+    r = comboBox_nR->currentIndex();
+    NORMAL = {l,m,r};
+    std::cout<<NORMAL[0]<<" - "<<NORMAL[1]<<" - "<<NORMAL[2]<<" - "<<std::endl;
+    vector<float> test = {1,1,1};
+    //test.resize(3);
+    switch(NORMAL[0]){
+     case 0:
+        test[0] = doubleSpinBox_ax->value();
+        test[1] = doubleSpinBox_ay->value();
+        test[2] = doubleSpinBox_az->value();
+        break;
+     case 1:
+        test[0] = doubleSpinBox_bx->value();
+        test[1] = doubleSpinBox_by->value();
+        test[2] = doubleSpinBox_bz->value();
+        break;
+     case 2:
+        test[0] = doubleSpinBox_cx->value();
+        test[1] = doubleSpinBox_cy->value();
+        test[2] = doubleSpinBox_cz->value();
+        break;
+     case 3:
+        test[0] = doubleSpinBox_dx->value();
+        test[1] = doubleSpinBox_dy->value();
+        test[2] = doubleSpinBox_dz->value();
+        break;
+    }
+
+    vector<float> testo = {1,1,1};
+    //testo.resize(3);
+    switch(NORMAL[1]){
+     case 0:
+        testo[0] = doubleSpinBox_ax->value();
+        testo[1] = doubleSpinBox_ay->value();
+        testo[2] = doubleSpinBox_az->value();
+        break;
+     case 1:
+        testo[0] = doubleSpinBox_bx->value();
+        testo[1] = doubleSpinBox_by->value();
+        testo[2] = doubleSpinBox_bz->value();
+        break;
+     case 2:
+        testo[0] = doubleSpinBox_cx->value();
+        testo[1] = doubleSpinBox_cy->value();
+        testo[2] = doubleSpinBox_cz->value();
+        break;
+     case 3:
+        testo[0] = doubleSpinBox_dx->value();
+        testo[1] = doubleSpinBox_dy->value();
+        testo[2] = doubleSpinBox_dz->value();
+        break;
+    }
+
+    vector<float> testa = {1,1,1};
+    //testa.resize(3);
+    switch(NORMAL[2]){
+     case 0:
+        testa[0] = doubleSpinBox_ax->value();
+        testa[1] = doubleSpinBox_ay->value();
+        testa[2] = doubleSpinBox_az->value();
+        break;
+     case 1:
+        testa[0] = doubleSpinBox_bx->value();
+        testa[1] = doubleSpinBox_by->value();
+        testa[2] = doubleSpinBox_bz->value();
+        break;
+     case 2:
+        testa[0] = doubleSpinBox_cx->value();
+        testa[1] = doubleSpinBox_cy->value();
+        testa[2] = doubleSpinBox_cz->value();
+        break;
+     case 3:
+        testa[0] = doubleSpinBox_dx->value();
+        testa[1] = doubleSpinBox_dy->value();
+        testa[2] = doubleSpinBox_dz->value();
+        break;
+    }
+
+    //std::cout<<test[0]<<std::endl;
+    vector<float> left = Vector::direction(testo, test);
+    vector<float> right = Vector::direction(testo, testa);
+    vector<float> normal = Vector::normal(left,right);
+    cout<<normal[0]<<" - "<<normal[1]<<" - "<<normal[2]<<" - "<<std::endl;
 }
