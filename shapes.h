@@ -11,6 +11,7 @@ public:
     Shapes();
     void axes();
     void complex(vector<vector<vector<float>>> &construct, vector<int> &rotation, int current);
+    void dart(std::vector<float> base, std::vector<float> end);
 };
 
 #endif // SHAPES_H

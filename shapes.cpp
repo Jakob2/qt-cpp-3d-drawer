@@ -75,3 +75,11 @@ void Shapes::complex(vector<vector<vector<float>>> &construct, vector<int> &rota
     }
     glPopMatrix();
 }
+
+void Shapes::dart(std::vector<float> base, std::vector<float> end){
+    glBegin(GL_LINES);
+    glLineWidth(2.0);
+    glVertex3f(base[0],base[1],base[2]);
+    glVertex3f(end[0],end[1],end[2]);
+    glEnd();
+}

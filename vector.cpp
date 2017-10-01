@@ -33,7 +33,7 @@ float Vector::absolute(vector<float> a){
 vector<float> Vector::normalize(vector<float> a){
     vector<float> out;
     float x,y,z, abs;
-    abs = absolute(a);
+    abs = Vector::absolute(a);
     x = a[0] / abs;
     y = a[1] / abs;
     z = a[2] / abs;

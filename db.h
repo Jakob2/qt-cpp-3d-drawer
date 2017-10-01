@@ -1,3 +1,4 @@
+
 #ifndef DB_H
 #define DB_H
 
@@ -31,6 +32,10 @@ public:
     void removeName(QString name);
     void saveColor(QString name, QString part, QString r, QString g, QString b);
 
+    void insertNormal(QString name, QString part, QString nX, QString nY, QString nZ);
+    void selectNormal(QString name);
+    static vector<vector<float>> normal;
+
 private:
     QString db = "3dg";
     QString table = "poly";
@@ -41,6 +46,7 @@ private:
 
     void setConstruct(int size);
     //void setThings();
+    void setNormal(int size);
 
 };
 

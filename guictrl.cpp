@@ -123,6 +123,7 @@ void GuiCtrl::choosePart(){
     initB(comboBox_part->currentText());
     initC(comboBox_part->currentText());
     initD(comboBox_part->currentText());
+    selectNormal(comboBox_name->currentText());
     view.paintGL(1.0, rotation, comboBox_part->currentText());
     textBrowser->append(selPart);
 }
@@ -375,6 +376,6 @@ void GuiCtrl::setNormal(){
     //std::cout<<test[0]<<std::endl;
     vector<float> left = Vector::direction(testo, test);
     vector<float> right = Vector::direction(testo, testa);
-    vector<float> normal = Vector::normal(left,right);
+    vector<float> normal = Vector::normalize(Vector::normal(left,right));
     cout<<normal[0]<<" - "<<normal[1]<<" - "<<normal[2]<<" - "<<std::endl;
 }

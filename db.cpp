@@ -14,6 +14,7 @@ vector<vector<float>> Db::things;
 vector<vector<vector<float>>> Db::construct;
 vector<int> Db::names;
 vector<int> Db::parts;
+vector<vector<float>> Db::normal;
 
 Db::Db(){
     connectSQL();
@@ -48,6 +49,16 @@ void Db::setConstruct(int size){
             for(int k=0; k<3; k++){
                 Db::construct[i][j].push_back(0);
             }
+        }
+    }
+}
+
+void Db::setNormal(int size){
+    Db::normal.clear();
+    for(int i=0; i<size; i++){
+        Db::normal.push_back(vector<float>());
+        for(int j=0; j<5; j++){
+            Db::normal[i].push_back(0);
         }
     }
 }
@@ -263,5 +274,39 @@ void Db::saveColor(QString name, QString part, QString r, QString g, QString b){
     else{
         savColor = "Update color error.";
         qDebug()<<"update color error"<<query.lastError()<<" / "<<query.lastQuery();
+    }
+}
+
+void Db::insertNormal(QString name, QString part, QString nX, QString nY, QString nZ){
+    QSqlQuery query;
+    if(query.exec("UPDATE "+table+" SET nX="+nX+", nY="+nY+", nZ="+nZ+" WHERE name="+name+" and part="+part)){
+        addNormal = "Normal updated for part "+part+".";
+        cout<<"normal updated"<<endl;
+    }
+    else{
+        addNormal = "Update normal error.";
+        qDebug()<<"update normal error"<<query.lastError()<<" / "<<query.lastQuery();
+    }
+}
+
+void Db::selectNormal(QString name){
+    QSqlQuery query;
+    int size = 0;
+    if(query.exec("SELECT COUNT(part) FROM "+table+" WHERE name="+name)) cout<<"normals count selected"<<endl;
+    else cout<<"count normals error"<<endl;
+    while(query.next()){
+        size = query.value(0).toInt();
+    }
+    setNormal(size);
+    if(query.exec("SELECT part, nX, nY, nZ FROM "+table+" WHERE name="+name)) cout<<"normals selected"<<endl;
+    else cout<<"select normals error"<<endl;
+    int index = 0;
+    while(query.next()){
+        Db::normal[index][0] = query.value(0).toFloat();
+        Db::normal[index][1] = query.value(1).toFloat();
+        Db::normal[index][2] = query.value(2).toFloat();
+        Db::normal[index][3] = query.value(3).toFloat();
+        Db::normal[index][4] = query.value(4).toFloat();
+        index++;
     }
 }
