@@ -306,7 +306,7 @@ void Db::selectNormal(QString name){
         Db::normal[index][1] = query.value(1).toFloat();
         Db::normal[index][2] = query.value(2).toFloat();
         Db::normal[index][3] = query.value(3).toFloat();
-        Db::normal[index][4] = query.value(4).toFloat();
+        //Db::normal[index][4] = query.value(4).toFloat();
         index++;
     }
 }

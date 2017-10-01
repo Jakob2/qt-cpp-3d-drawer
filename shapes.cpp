@@ -24,8 +24,11 @@ void Shapes::axes(){
     glEnd();
 }
 
-void Shapes::complex(vector<vector<vector<float>>> &construct, vector<int> &rotation, int current){
+void Shapes::complex(vector<vector<vector<float>>> &construct, vector<int> &rotation, int current, vector<vector<float>> &normal){
     float r, g, b;
+    vector<float> base;
+    vector<float> end;
+
     glMatrixMode(GL_MODELVIEW);
     glPushMatrix();
     glRotatef(rotation[0], 1,0,0);
@@ -33,6 +36,10 @@ void Shapes::complex(vector<vector<vector<float>>> &construct, vector<int> &rota
     glRotatef(rotation[2], 0,0,1);
     axes();
     for(int i=0; i<(int)construct.size(); i++){
+        base =  {construct[i][0][0],construct[i][0][1],construct[i][0][2]};
+        end = {base[0]-normal[i][1],base[1]-normal[i][2],base[2]-normal[i][3]};
+        dart(base,end);
+
         r = construct[i][4][0];
         g = construct[i][4][1];
         b = construct[i][4][2];
@@ -79,6 +86,7 @@ void Shapes::complex(vector<vector<vector<float>>> &construct, vector<int> &rota
 void Shapes::dart(std::vector<float> base, std::vector<float> end){
     glBegin(GL_LINES);
     glLineWidth(2.0);
+    glColor3f(0,0,0);
     glVertex3f(base[0],base[1],base[2]);
     glVertex3f(end[0],end[1],end[2]);
     glEnd();

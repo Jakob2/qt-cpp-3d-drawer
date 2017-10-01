@@ -381,4 +381,6 @@ void GuiCtrl::setNormal(){
 
     updateNormal(comboBox_name->currentText(),comboBox_part->currentText(), QString::number(normal[0]),QString::number(normal[1]),QString::number(normal[2]));
     textBrowser->append(addNormal+" ["+QString::number(normal[0])+"|"+QString::number(normal[1])+"|"+QString::number(normal[2])+"]");
+    selectNormal(comboBox_name->currentText());
+    view.paintGL(1.0, rotation, comboBox_part->currentText());
 }

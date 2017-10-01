@@ -40,4 +40,40 @@ vector<float> Vector::normalize(vector<float> a){
     return out = {x,y,z};
 }
 
+std::vector<float> Vector::vectorIntersection(std::vector<float> paramA, std::vector<float> paramB){
+    float Ax,Ay,Az, mx,my,mz, Bx,By,Bz, nx,ny,nz;
+    Ax = paramA[0];
+    Ay = paramA[1];
+    Az = paramA[2];
+    mx = paramA[3];
+    my = paramA[4];
+    mz = paramA[5];
+
+    Bx = paramB[0];
+    By = paramB[1];
+    Bz = paramB[2];
+    nx = paramB[3];
+    ny = paramB[4];
+    nz = paramB[5];
+
+    float a,b, t;
+    a = -By*mx - Ax*my + Bx*my + Ay*mx;
+    b = ny*mx - nx*my;
+
+    t = (a/b);
+    //std::cout<<"t= "<<t<<"\n---"<<std::endl;
+
+    float x,y,z;
+
+    x = Bx + t*nx;
+    y = By + t*ny;
+    z = Bz + t*nz;
+
+    /*std::cout<<"x= "<<x<<std::endl;
+    std::cout<<"y= "<<y<<std::endl;
+    std::cout<<"z= "<<z<<std::endl;*/
+
+    std::vector<float> out;
+    return out = {x,y,z};
+}
 
