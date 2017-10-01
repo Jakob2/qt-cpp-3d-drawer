@@ -277,7 +277,7 @@ void Db::saveColor(QString name, QString part, QString r, QString g, QString b){
     }
 }
 
-void Db::insertNormal(QString name, QString part, QString nX, QString nY, QString nZ){
+void Db::updateNormal(QString name, QString part, QString nX, QString nY, QString nZ){
     QSqlQuery query;
     if(query.exec("UPDATE "+table+" SET nX="+nX+", nY="+nY+", nZ="+nZ+" WHERE name="+name+" and part="+part)){
         addNormal = "Normal updated for part "+part+".";

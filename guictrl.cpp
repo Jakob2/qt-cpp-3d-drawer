@@ -378,4 +378,7 @@ void GuiCtrl::setNormal(){
     vector<float> right = Vector::direction(testo, testa);
     vector<float> normal = Vector::normalize(Vector::normal(left,right));
     cout<<normal[0]<<" - "<<normal[1]<<" - "<<normal[2]<<" - "<<std::endl;
+
+    updateNormal(comboBox_name->currentText(),comboBox_part->currentText(), QString::number(normal[0]),QString::number(normal[1]),QString::number(normal[2]));
+    textBrowser->append(addNormal+" ["+QString::number(normal[0])+"|"+QString::number(normal[1])+"|"+QString::number(normal[2])+"]");
 }

@@ -32,7 +32,7 @@ public:
     void removeName(QString name);
     void saveColor(QString name, QString part, QString r, QString g, QString b);
 
-    void insertNormal(QString name, QString part, QString nX, QString nY, QString nZ);
+    void updateNormal(QString name, QString part, QString nX, QString nY, QString nZ);
     void selectNormal(QString name);
     static vector<vector<float>> normal;
 
