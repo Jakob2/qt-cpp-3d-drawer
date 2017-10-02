@@ -11,7 +11,7 @@ GlWidget::GlWidget(QWidget * parent) : QGLWidget(parent){
 }
 
 void GlWidget::initializeGL(){
-    glClearColor(0.5,0.5,0.5,1);
+    glClearColor(.7,.7,.7,1);
     glEnable(GL_DEPTH_TEST);
     Db db;
 }

@@ -16,8 +16,8 @@ vector<float> Vector::direction(vector<float> a, vector<float> b){
 vector<float> Vector::normal(vector<float> a, vector<float> b){
     vector<float> out;
     float x,y,z;
-    x = a[1]*b[2] - a[2]*b[1];
-    //x = a[2]*b[1] - a[1]*b[2];
+    //x = a[1]*b[2] - a[2]*b[1];
+    x = a[2]*b[1] - a[1]*b[2];
     y = a[2]*b[0] - a[0]*b[2];
     z = a[0]*b[1] - a[1]*b[0];
     return out = {x,y,z};
@@ -57,8 +57,18 @@ std::vector<float> Vector::vectorIntersection(std::vector<float> paramA, std::ve
     nz = paramB[5];
 
     float a,b, t;
-    a = -By*mx - Ax*my + Bx*my + Ay*mx;
-    b = ny*mx - nx*my;
+    if(ny*mx - nx*my){
+        a = -By*mx - Ax*my + Bx*my + Ay*mx;
+        b = ny*mx - nx*my;
+    }
+    else if(nz*my - ny*mz){
+        a = -Bz*my - Ay*mz + By*mz + Az*my;
+        b = nz*my - ny*mz;
+    }
+    else if(nz*mx - nx*mz){
+        a = -Bz*mx - Ax*mz + Bx*mz + Az*mx;
+        b = nz*mx - nx*mz;
+    }
 
     t = (a/b);
     //std::cout<<"t= "<<t<<"\n---"<<std::endl;

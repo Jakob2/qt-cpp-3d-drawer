@@ -309,4 +309,7 @@ void Db::selectNormal(QString name){
         //Db::normal[index][4] = query.value(4).toFloat();
         index++;
     }
+    for(auto i : Db::normal){
+        cout<<"DB SELECT NORMAL: "<<i[1]<<" - "<<i[2]<<" - "<<i[3]<<endl;
+    }
 }
