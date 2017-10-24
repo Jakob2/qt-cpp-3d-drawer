@@ -32,6 +32,7 @@ public slots:
     void resetRotation();
     void hide();
     void real();
+    void normal();
 
     void parts();
     void choosePart();

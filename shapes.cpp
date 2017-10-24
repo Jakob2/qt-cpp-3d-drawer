@@ -52,7 +52,7 @@ void Shapes::complex(vector<vector<vector<float>>> &construct, vector<int> &rota
         //cout<<"SHAPE NORMAL: "<<mid[0]<<" - "<<mid[1]<<" - "<<mid[2]<<" / "<<normal[i][1]<<" - "<<normal[i][2]<<" - "<<normal[i][3]<<endl;
 
         end = {mid[0]-normal[i][1]/2,mid[1]-normal[i][2]/2,mid[2]-normal[i][3]/2};
-        dart(mid,end);
+        if(!showNormals) dart(mid,end);
 
         r = construct[i][4][0];
         g = construct[i][4][1];

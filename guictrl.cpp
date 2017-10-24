@@ -14,6 +14,7 @@ void GuiCtrl::connectGUI(){
     QObject::connect(pushButton_reset_rotation, SIGNAL(clicked(bool)), this, SLOT(resetRotation()));
     QObject::connect(radioButton_hide, SIGNAL(toggled(bool)), this, SLOT(hide()));
     QObject::connect(radioButton_realcolor, SIGNAL(toggled(bool)), this, SLOT(real()));
+    QObject::connect(radioButton_normal, SIGNAL(toggled(bool)), this, SLOT(normal()));
 
     QObject::connect(comboBox_name, SIGNAL(currentIndexChanged(int)), this, SLOT(parts()));
     QObject::connect(comboBox_part, SIGNAL(currentIndexChanged(int)), this, SLOT(choosePart()));
@@ -98,6 +99,11 @@ void GuiCtrl::hide(){
 
 void GuiCtrl::real(){
     REAL == 0 ? REAL = 1 : REAL = 0;
+    view.paintGL(1.0, rotation, comboBox_part->currentText());
+}
+
+void GuiCtrl::normal(){
+    showNormals ? showNormals = 0 : showNormals = 1;
     view.paintGL(1.0, rotation, comboBox_part->currentText());
 }
 

@@ -8,6 +8,7 @@ using namespace std;
 
 extern int modPart;
 extern int display;
+extern int showNormals;
 extern int REAL;
 extern int WIDTH;
 extern int HEIGHT;
