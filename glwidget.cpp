@@ -23,6 +23,7 @@ void GlWidget::paintGL(float zoom, vector<int> rotation, QString current){
     glScalef(zoom, zoom, zoom);
     int c = current.toInt();
     if(Db::construct.size()>1) complex(Db::construct, rotation, c, Db::normal);
+<<<<<<< HEAD
     else cout<<"VECTOR IS EMPTY"<<endl;
     //four(Db::things, rotation);
 }
@@ -31,6 +32,11 @@ void GlWidget::paintGL(){
 
 }
 
+=======
+    //four(Db::things, rotation);
+}
+
+>>>>>>> 4e5c2f3978a3d2d038cf18b8394c137600d51d01
 void GlWidget::resizeGL(int w, int h){
     glViewport(0,0,w,h);
     glMatrixMode(GL_PROJECTION);

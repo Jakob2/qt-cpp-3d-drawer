@@ -37,14 +37,18 @@ void Shapes::complex(vector<vector<vector<float>>> &construct, vector<int> &rota
     glRotatef(rotation[2], 0,0,1);
     axes();
     for(int i=0; i<(int)construct.size(); i++){
+<<<<<<< HEAD
 
         cout<<"calling"<<endl;
 
+=======
+>>>>>>> 4e5c2f3978a3d2d038cf18b8394c137600d51d01
         //mid =  {construct[i][0][0],construct[i][0][1],construct[i][0][2]};
         vector<float> va = {construct[i][0][0],construct[i][0][1],construct[i][0][2]};
         vector<float> vb = {construct[i][1][0],construct[i][1][1],construct[i][1][2]};
         vector<float> vc = {construct[i][2][0],construct[i][2][1],construct[i][2][2]};
         vector<float> vd = {construct[i][3][0],construct[i][3][1],construct[i][3][2]};
+<<<<<<< HEAD
         /*cout<<"POSI: "<<i<<endl;
         cout<<"MID INPUT va: "<<va[0]<<" - "<<va[1]<<" - "<<va[2]<<endl;
         cout<<"MID INPUT vb: "<<vb[0]<<" - "<<vb[1]<<" - "<<vb[2]<<endl;
@@ -53,6 +57,16 @@ void Shapes::complex(vector<vector<vector<float>>> &construct, vector<int> &rota
         vector<float> mid = middle(va,vb,vc,vd);
 
         //cout<<"SHAPE NORMAL: "<<mid[0]<<" - "<<mid[1]<<" - "<<mid[2]<<" / "<<normal[i][1]<<" - "<<normal[i][2]<<" - "<<normal[i][3]<<endl;
+=======
+        cout<<"POSI: "<<i<<endl;
+        cout<<"MID INPUT va: "<<va[0]<<" - "<<va[1]<<" - "<<va[2]<<endl;
+        cout<<"MID INPUT vb: "<<vb[0]<<" - "<<vb[1]<<" - "<<vb[2]<<endl;
+        cout<<"MID INPUT vc: "<<vc[0]<<" - "<<vc[1]<<" - "<<vc[2]<<endl;
+        cout<<"MID INPUT vd: "<<vd[0]<<" - "<<vd[1]<<" - "<<vd[2]<<endl;
+        vector<float> mid = middle(va,vb,vc,vd);
+
+        cout<<"SHAPE NORMAL: "<<mid[0]<<" - "<<mid[1]<<" - "<<mid[2]<<" / "<<normal[i][1]<<" - "<<normal[i][2]<<" - "<<normal[i][3]<<endl;
+>>>>>>> 4e5c2f3978a3d2d038cf18b8394c137600d51d01
         end = {mid[0]-normal[i][1]/2,mid[1]-normal[i][2]/2,mid[2]-normal[i][3]/2};
         dart(mid,end);
 
@@ -106,7 +120,11 @@ void Shapes::dart(std::vector<float> base, std::vector<float> end){
     glVertex3f(base[0],base[1],base[2]);
     glVertex3f(end[0],end[1],end[2]);
     glEnd();
+<<<<<<< HEAD
     //cout<<"DRAW A DART"<<endl;
+=======
+    cout<<"DRAW A DART"<<endl;
+>>>>>>> 4e5c2f3978a3d2d038cf18b8394c137600d51d01
 }
 
 vector<float> Shapes::middle(vector<float> a, vector<float> b, vector<float> c, vector<float> d){
@@ -154,12 +172,20 @@ vector<float> Shapes::middle(vector<float> a, vector<float> b, vector<float> c, 
     n[2] = sqrt(pow(n[2],2));*/
 
 
+<<<<<<< HEAD
     /*cout<<"E: "<<E[0]<<" - "<<E[1]<<" - "<<E[2]<<endl;
+=======
+    cout<<"E: "<<E[0]<<" - "<<E[1]<<" - "<<E[2]<<endl;
+>>>>>>> 4e5c2f3978a3d2d038cf18b8394c137600d51d01
     cout<<"G: "<<G[0]<<" - "<<G[1]<<" - "<<G[2]<<endl;
     cout<<"F: "<<F[0]<<" - "<<F[1]<<" - "<<F[2]<<endl;
     cout<<"H: "<<H[0]<<" - "<<H[1]<<" - "<<H[2]<<endl;
     cout<<"m: "<<m[0]<<" - "<<m[1]<<" - "<<m[2]<<endl;
+<<<<<<< HEAD
     cout<<"n: "<<n[0]<<" - "<<n[1]<<" - "<<n[2]<<endl;*/
+=======
+    cout<<"n: "<<n[0]<<" - "<<n[1]<<" - "<<n[2]<<endl;
+>>>>>>> 4e5c2f3978a3d2d038cf18b8394c137600d51d01
 
 
     vector<float> paramA = {E[0],E[1],E[2], m[0],m[1],m[2]};

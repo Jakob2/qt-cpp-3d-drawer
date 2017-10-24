@@ -25,7 +25,11 @@ Db::Db(){
 
 void Db::connectSQL(){
     QSqlDatabase m_db = QSqlDatabase::addDatabase("QSQLITE");
+<<<<<<< HEAD
     m_db.setDatabaseName("/home/jakob/QT4/DATABASES/"+db);
+=======
+    m_db.setDatabaseName("/home/ok/jakob/QT4/DATABASES/"+db);
+>>>>>>> 4e5c2f3978a3d2d038cf18b8394c137600d51d01
     if(!m_db.open()) cout<< "Error: connection with database fail"<<endl;
     else cout<< "Database: connection ok"<<endl;
 }
@@ -309,7 +313,13 @@ void Db::selectNormal(QString name){
         //Db::normal[index][4] = query.value(4).toFloat();
         index++;
     }
+<<<<<<< HEAD
     /*for(auto i : Db::normal){
         cout<<"DB SELECT NORMAL: "<<i[1]<<" - "<<i[2]<<" - "<<i[3]<<endl;
     }*/
+=======
+    for(auto i : Db::normal){
+        cout<<"DB SELECT NORMAL: "<<i[1]<<" - "<<i[2]<<" - "<<i[3]<<endl;
+    }
+>>>>>>> 4e5c2f3978a3d2d038cf18b8394c137600d51d01
 }
