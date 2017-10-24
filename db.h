@@ -1,7 +1,4 @@
-<<<<<<< HEAD
-=======
 
->>>>>>> 4e5c2f3978a3d2d038cf18b8394c137600d51d01
 #ifndef DB_H
 #define DB_H
 
