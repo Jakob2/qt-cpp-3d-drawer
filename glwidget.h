@@ -14,6 +14,7 @@ public:
 
     void initializeGL();
     void paintGL(float zoom, vector<int> rotation, QString current);
+    void paintGL();
     void resizeGL(int w, int h);
 
 private:
